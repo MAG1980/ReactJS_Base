@@ -4,31 +4,21 @@ import {useState} from "react";
 import MessageList from "./MessageList";
 
 function App() {
-	let messages = [
-		{author: "Николай", text: "Привет! Как дела?"},
-		{author: "Наталья", text: "Привет! Всё ОК."},
-		{author: "Сергей", text: "Hi! Какие планы на выходные?"}
-	];
+	// let messages = [
+	// 	{author: "Николай", text: "Привет! Как дела?"},
+	// 	{author: "Наталья", text: "Привет! Всё ОК."},
+	// 	{author: "Сергей", text: "Hi! Какие планы на выходные?"}
+	// ];
 	const [messageList, setMessageList] = useState([]);
-
-	// console.log(messageList);
-	// let message = {author: "Елена", text: "Привет! Будем изучать React?"};
-	// let arr = [...messageList, message];
-	// console.log(arr);
-	// setMessageList(arr);
-	// // setMessageList(arr);
-	// console.log(messageList);
+	const [messageId, setMessageId] = useState(0);
 
 	function addMessage(e) {
 		e.preventDefault();
-		// let textInput = e.currentTarget.elements['textInput']
-		// console.log(textInput.value);
-		// messages.push({text: textInput.value});
-		// textInput.value = '';
-		console.log(messageList);
-		let message = {author: "Елена", text: "Привет! Будем изучать React?"};
+		let textInput = e.currentTarget.elements['textInput']
+		let message = {id: messageId, author: "Елена", text: textInput.value};
+		setMessageId(messageId + 1);
+		textInput.value = '';
 		let arr = [...messageList, message];
-		console.log(arr);
 		setMessageList(arr);
 		console.log(messageList);
 	};
@@ -50,9 +40,7 @@ function App() {
 				</a>
 			</header>
 
-			<h1>Hello CodeSandbox</h1>
-			<h2>Start editing to see some magic happen!</h2>
-			{/* <MessageList list={messageList} /> */}
+			<MessageList list={messageList}/>
 			<form onSubmit={(e) => addMessage(e)}>
 				<input type="text" name="textInput"/>
 				<button>
