@@ -1,5 +1,13 @@
-.message__item {
-	display: flex;
-	justify-content: space-around;
-	color: darkslategray;
+.message {
+	&__item {
+		display: flex;
+		justify-content: space-around;
+		color: darkslategray;
+	}
+
+	&__name {
+		font-weight: 900;
+	}
+
 }
+
