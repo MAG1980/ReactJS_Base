@@ -47,7 +47,7 @@
 
 .App-messageList {
 	width: 50%;
-	height: 70vh;
+	height: 60vh;
 	border-radius: 30px;
 	background-color: lightskyblue;
 	overflow-y: scroll;
@@ -58,10 +58,46 @@
 }
 
 .App-forms {
-	width: 30%;
+	width: 50%;
+	margin-top: 10px;
+}
+
+.form {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-radius: 20px;
+	margin: 5px 0;
+}
+
+.from__username {
+	width: 10%;
+	color: lightskyblue;
+	text-align: left;
+	font-weight: 900;
+}
+
+.form__wrapper {
+	width: 90%;
+	height: 50px;
+	font-size: 30px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+
+}
+
+.form__input {
+	width: 60%;
+	height: 100%;
 }
 
 .form__button {
+	width: 25%;
 	color: lightskyblue;
 	background-color: indigo;
+	padding: 20px;
+	border: none;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
