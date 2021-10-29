@@ -1,10 +1,11 @@
-import logo from './logo.svg';
 import './App.css';
 import { React, useState, useEffect } from "react";
 import Message from "./Message";
 import { Layout } from "./Components/Layout";
 import { Header } from "./Components/Header"
-import { Box } from '@mui/material';
+import { Box, Paper, TextField, Divider, Button } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+
 
 function App() {
 	const [ messageList, setMessageList ] = useState( [] );
@@ -36,56 +37,81 @@ function App() {
 	};
 
 	return (
-		<>
-			<Header></Header>
-			<div className="App">
-				<Layout>
-					<Box sx={{ with: '100%' }}>
-						<div className="App-forms">
-							<form className="form" onSubmit={( e ) => addMessage( e )}>
+		<Paper evaluation={2}
+		       variant="outlined"
+		       sx={{
+			       boxSizing: 'border-box',
+			       p: '20px 10%',
+			       height: '100vh',
+			       backgroundColor: 'background.main'
+		       }}
+		>
+			<Paper sx={{
+				backgroundColor: 'background.second',
+				display: 'flex',
+				flexDirection: 'column',
+				p: 2
+			}}>
 
-								<p className="from__username">Елена:</p>
-								<div className="form__wrapper">
-									<input className="form__input" type="text" name="textInput" data-user-name="Елена"/>
-									<button className="form__button">
-										Отправить сообщение
-									</button>
-								</div>
+				<Layout sx={{
+					border: ' 1px solid border',
+				}}>
+					<Header/>
+					<Box sx={{
+						border: ' 1px solid',
+						borderColor: 'border.myBorder',
+						width: '100%',
+						display: 'grid',
+						gridTemplateColumns: '1fr 3fr',
+						gridTemplateRows: '70vh',
+						overflow: 'hidden'
+					}}>
+						<Box sx={{
+							border: ' 1px solid',
+							borderColor: 'border.myBorder',
+							backgroundColor: 'background.main',
+						}}>
+						</Box>
 
-							</form>
-							<form className="form" onSubmit={( e ) => addMessage( e )}>
-								<p className="from__username">Николай:</p>
-								<div className="form__wrapper">
-									<input className="form__input" type="text" name="textInput" data-user-name="Николай"/>
-									<button className="form__button">
-										Отправить сообщение
-									</button>
-								</div>
-
-							</form>
-							<form className="form" onSubmit={( e ) => addMessage( e )}>
-								<p className="from__username">Михаил:</p>
-								<div className="form__wrapper">
-									<input className="form__input" type="text" name="textInput" data-user-name="Михаил"/>
-									<button className="form__button">
-										Отправить сообщение
-									</button>
-								</div>
-
-							</form>
-						</div>
-					</Box>
-					<Box sx={{ with: ' 100%' }}>
-						<div className="App-messageList">
-							<Message list={messageList}/>
-						</div>
+						<Box sx={{
+							border: ' 1px solid',
+							borderColor: 'border.myBorder',
+							backgroundColor: 'background.main',
+						}}>
+							<Box sx={{
+								overflow: 'hidden'
+							}}>
+								<Message list={messageList}/>
+							</Box>
+							<Divider/>
+							<Box component="form"
+							     sx={{
+								     display: 'flex',
+								     p: '10px'
+							     }}
+							     onSubmit={( e ) => addMessage( e )}>
+								<TextField
+									id="filled-basic"
+									label="Type Something"
+									variant="standard"
+									name="textInput" data-user-name="Елена"
+									sx={{ width: '100%' }}
+								/>
+								<Button variant="contained" endIcon={<SendIcon/>}
+								        sx={{
+									        borderRadius: '50%',
+									        p: 3
+								        }}>
+								</Button>
+							</Box>
+						</Box>
 					</Box>
 				</Layout>
+			</Paper>
+		</Paper>
 
-			</div>
-		</>
-
-	);
+	)
+		;
 }
 
 export default App;
