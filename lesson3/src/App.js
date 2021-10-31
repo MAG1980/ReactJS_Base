@@ -1,4 +1,5 @@
 import "./App.css";
+import uniqid from "uniqid";
 import { React, useState, useEffect } from "react";
 import Message from "./Message";
 import { Layout } from "./Components/Layout";
@@ -8,7 +9,6 @@ import SendIcon from "@mui/icons-material/Send";
 
 function App() {
   const [messageList, setMessageList] = useState([]);
-  const [messageId, setMessageId] = useState(0);
   const [input, setInput] = useState("");
   let currentInput = "";
   useEffect(() => {
@@ -16,28 +16,24 @@ function App() {
       messageList.length !== 0 &&
       messageList[messageList.length - 1].author !== "Bot"
     ) {
-      let message = { id: messageId, author: "Bot", text: "Привет от Бота!" };
-      setMessageId(messageId + 1);
-      setTimeout(() => {
-        let arr = [...messageList, message];
-        setMessageList(arr);
+      let timerId = setTimeout(() => {
+        sendMessage("Bot", "Привет от бота!");
       }, 1500);
+      return () => {
+        clearTimeout(timerId);
+      };
     }
   }, [messageList]);
 
-  //   function addMessage(e) {
-  //     e.preventDefault();
-  //     let textInput = e.currentTarget.elements["textInput"];
-  //     let message = {
-  //       id: messageId,
-  //       author: textInput.dataset.userName,
-  //       text: textInput.value,
-  //     };
-  //     setMessageId(messageId + 1);
-  //     textInput.value = "";
-  //     let arr = [...messageList, message];
-  //     setMessageList(arr);
-  //   }
+  function sendMessage(author, text) {
+    let message = {
+      id: uniqid(),
+      author: author,
+      text: text,
+    };
+    let newMessagesArr = [...messageList, message];
+    setMessageList(newMessagesArr);
+  }
 
   function changeInput(e) {
     currentInput = e.target.value;
@@ -45,18 +41,13 @@ function App() {
   }
   function addMessage(e) {
     e.preventDefault();
+    sendMessage("user", input);
     console.log(input);
-    setInput("");
-    let message = {
-      id: messageId,
-      author: "Пользователь",
-      text: input,
-    };
-    setMessageId(messageId + 1);
-    let arr = [...messageList, message];
-    setMessageList(arr);
+    resetInput();
   }
-
+  function resetInput() {
+    setInput("");
+  }
   return (
     <Paper
       evaluation={2}
