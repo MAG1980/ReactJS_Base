@@ -1,15 +1,16 @@
-import "./Message.scss"
+import {Box} from "@mui/material";
 
 const Message = (props) => {
 		return props.list.map((message) => {
 			return (
-				<div className="message" key={message.id}>
-					<div className="message__item">
+				<Box key={message.id} sx={{width: "100%"}}>
+					<Box  sx={{				display:'flex',
+				justifyContent:'space-around'}}>
 						<p className="message__name">{message.author}:</p>
 						<p>{message.text}</p>
-					</div>
+					</Box>
 					<div id="last__message"></div>
-				</div>
+				</Box>
 			)
 		})
 	}
