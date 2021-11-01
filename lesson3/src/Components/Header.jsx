@@ -7,6 +7,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 export const Header = ( props ) => {
 	return (
 		<AppBar
+		sx={{ gridArea: "header", alignSelf:"center" }}
 			position="static">
 			<Container sx={{ display: "flex", justifyContent: "space-between" }}
 			>
