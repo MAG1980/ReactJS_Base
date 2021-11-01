@@ -48,7 +48,6 @@ export const Layout = ( { children } ) => {
 
    const inputRef = useRef(null);
   useEffect(() => {
-	  console.log(inputRef.current)
 	  inputRef.current.focus()
 	})
  
@@ -87,7 +86,8 @@ export const Layout = ( { children } ) => {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-				  p: 1
+                  p: 1,
+                bgcolor: "background.main", 
                 }}
               >
                 <TextField
@@ -98,8 +98,8 @@ export const Layout = ( { children } ) => {
                   label="Type Something"
                   variant="standard"
                   name="textInput"
-                  data-user-name="Елена"
-                  sx={{ width: "100%" }}
+                  sx={{ width: "100%",
+                autoComplete:"off"}}
                 />
                 <Button
                   size="small"

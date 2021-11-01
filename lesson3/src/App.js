@@ -3,8 +3,9 @@ import "./App.css";
 import { Layout } from "./Components/Layout";
 import { Chat } from "./Components/Chat";
 import { Chats } from "./Components/Chats";
-import { Box, Paper } from "@mui/material";
+import { Paper } from "@mui/material";
 import { Header } from "./Components/Header";
+import { Search } from "./Components/Search";
 
 function App() {
   return (
@@ -15,36 +16,26 @@ function App() {
         boxSizing: "border-box",
         p: "20px 10%",
         height: "100vh",
-        backgroundColor: "background.main",
+        bgcolor: "background.main",
       }}
     >
       <Paper
         sx={{
-          backgroundColor: "background.second",
+          bgcolor: "background.second",
           display: "grid",
           gridTemplateAreas: `
           "header header"
           "chats messages"`,
           gridTemplateRows: "30px 85vh",
           gridTemplateColumns: "1fr 3fr",
+          p: 2,
         }}
       >
         <Header />
-        <Box
-          sx={{
-            gridArea: "chats",
-            border: " 1px solid",
-            borderColor: "border.myBorder",
-            width: "100%",
-          }}
-        >
-          <Paper elevation={1} />
-          <Chats>
-            <Chat />
-          </Chats>
-          <Paper />
-        </Box>
-        <Layout></Layout>
+        <Chats>
+          <Search />
+        </Chats>
+        <Layout />
       </Paper>
     </Paper>
   );
