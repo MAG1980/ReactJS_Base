@@ -3,7 +3,6 @@ import uniqid from "uniqid";
 import { React, useState, useEffect } from "react";
 import Message from "./Message";
 import { Layout } from "./Components/Layout";
-import { Header } from "./Components/Header";
 import { Avatar, Box, Paper, TextField, Divider, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
@@ -64,6 +63,7 @@ function App() {
           backgroundColor: "background.second",
           display: "flex",
           flexDirection: "column",
+          height: "85vh",
           p: 2,
         }}
       >
@@ -72,7 +72,6 @@ function App() {
             border: " 1px solid border",
           }}
         >
-          <Header />
           <Box
             sx={{
               border: " 1px solid",
@@ -92,11 +91,19 @@ function App() {
             >
               <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
             </Box>
-            <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Box
                 sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "end",
+                  flexGrow: 1,
                   overflow: "hidden",
-                  height: "55vh",
                   border: " 1px solid",
                   borderColor: "border.myBorder",
                   backgroundColor: "background.main",
@@ -105,7 +112,7 @@ function App() {
                 <Box
                   sx={{
                     display: "flex",
-                    flexDirection: "column-reverse",
+                    flexDirection: "column",
                     alignItems: "start",
                   }}
                 >
@@ -119,8 +126,6 @@ function App() {
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  p: "10px",
-                  height: "15vh",
                 }}
               >
                 <TextField
@@ -134,13 +139,13 @@ function App() {
                   sx={{ width: "100%" }}
                 />
                 <Button
+                  size="small"
                   type="submit"
                   variant="contained"
                   endIcon={<SendIcon />}
                   sx={{
+                    minWidth: 20,
                     borderRadius: "50%",
-                    width: "10vh",
-                    height: "10vh",
                   }}
                 ></Button>
               </Box>
