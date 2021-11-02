@@ -3,11 +3,11 @@ import { Home, Profile } from "./routes";
 import "./App.css";
 
 import { Layout } from "./Components/Layout";
-import { Chat } from "./Components/Chat";
 import { Chats } from "./Components/Chats";
 import { Paper } from "@mui/material";
 import { Header } from "./Components/Header";
 import { Search } from "./Components/Search";
+import { Chat } from "./routes/ChatList/routes";
 import { ChatList } from "./routes/ChatList";
 
 import Main from "./routes/Main";
@@ -16,6 +16,9 @@ function App() {
   return (
     <>
       <Switch>
+        <Route path="/chat_list/:chat_list_Id">
+          <Chat />
+        </Route>
         <Route path="/profile" component={Profile}></Route>
         <Route path="/header" component={Header}></Route>
         <Route path="/main" component={Main}></Route>

@@ -1,12 +1,12 @@
 import {
-	AppBar, Container, Typography, IconButton
+	Link, AppBar, Container, Typography, IconButton
 }
 	from '@mui/material';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 export const Header = ( props ) => {
 	return (
-		<AppBar
+		<AppBar component={Link} href="/"
 		sx={{ gridArea: "header", alignSelf:"center" }}
 			position="static">
 			<Container sx={{ display: "flex", justifyContent: "space-between" }}

@@ -15,7 +15,7 @@ export const ChatList = ({ children }) => {
   ];
   return (
     <Container>
-      <List sx={{ width: "100%", maxWidth: 200, bgcolor: "background.paper" }}>
+      {/* <List sx={{ width: "100%", maxWidth: 200, bgcolor: "background.paper" }}>
         {[1, 2, 3].map((value) => (
           <ListItem
             key={value}
@@ -28,7 +28,7 @@ export const ChatList = ({ children }) => {
             <ListItemText primary={`Chat ${value}`} />
           </ListItem>
         ))}
-      </List>
+      </List> */}
       <List
         sx={{
           gridArea: "chats",
