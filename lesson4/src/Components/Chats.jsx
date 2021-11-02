@@ -1,3 +1,4 @@
+import { propTypes } from "prop-types";
 import { List,  } from "@mui/material";
 import { Chat } from "./Chat";
 export const Chats = ({children}) =>{
@@ -5,7 +6,7 @@ export const Chats = ({children}) =>{
         {id:'341n234',
         name:'Brad Pitt'},
         {id:'34sfn234',
-        name:'Andgelina Jolie'},
+        name:'Angelina Jolie'},
         {id:'13434sfn234',
         name:'Megan Fox'},
     ]
@@ -21,6 +22,10 @@ export const Chats = ({children}) =>{
         pb:1,
         height:"97%" }}>
              {children}    
-        {chats.map(chat => <Chat  key={chat.id} name={chat.name} />)}
-        </List>)} 
+        {chats.map(item => <Chat  key={item.id} {...item} />)}
+        </List>
+        )} 
 
+Chats.propTypes = {
+
+}

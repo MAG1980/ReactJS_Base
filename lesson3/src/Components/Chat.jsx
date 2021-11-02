@@ -1,3 +1,4 @@
+import { propTypes } from "prop-types";
 import { Avatar, ListItem, ListItemAvatar, Typography } from "@mui/material";
 export const Chat = (props)=>{
     return(
@@ -13,4 +14,8 @@ export const Chat = (props)=>{
         <Typography>{props.name}</Typography>
       </ListItem>
     )
+}
+
+Chat.propTypes = {
+    name: propTypes.string,
 }
