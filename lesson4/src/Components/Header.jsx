@@ -1,21 +1,30 @@
 import {
-	Link, AppBar, Container, Typography, IconButton
-}
-	from '@mui/material';
+	 Button, AppBar, Container, Typography, IconButton
+}	from '@mui/material';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import { navigation } from "../navigation";
+import {Link} from "react-router-dom";
 
 export const Header = ( props ) => {
 	return (
-		<AppBar component={Link} href="/"
+		<AppBar 
 		sx={{ gridArea: "header", alignSelf:"center" }}
 			position="static">
 			<Container sx={{ display: "flex", justifyContent: "space-between" }}
 			>
-				<Typography variant="h6"
-				            component="span"
-				>
-					My MUI Chat
-				</Typography>
+			<Link to="/">
+					<Typography variant="h6"
+					sx={{color: "#fff"}} >
+						My MUI Chat
+					</Typography>
+			</Link>
+				{navigation.map((item) => {
+            return (
+              <Button sx={{color: "#fff"}}>
+                <Link to={item.path}>{item.title}</Link>
+              </Button>
+            );
+          })}
 				<IconButton color="inherit">
 					<AccountBoxIcon/>
 				</IconButton>

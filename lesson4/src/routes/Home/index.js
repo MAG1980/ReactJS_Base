@@ -1,40 +1,33 @@
 import React from "react";
-import List from "@mui/material/List";
-import Link from "@mui/material/Link";
-const navigation = [
-  {
-    path: "/",
-    title: "Home",
-  },
-  {
-    path: "/profile",
-    title: "Profile",
-  },
-  {
-    path: "/chat_list",
-    title: "ChatList",
-  },
-];
+import { Link } from "react-router-dom";
+import { Container, List, Button } from "@mui/material";
+import { Header } from "../../Components/Header";
+import { navigation } from "../../navigation";
 
 export const Home = ({ children }) => {
   return (
-    <List
-      sx={{
-        width: "100%",
-        bgcolor: "background.paper",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      {navigation.map((item) => {
-        return (
-          <List component={Link} href={item.path}>
-            {item.title}
-          </List>
-        );
-      })}
-    </List>
+    <>
+      <Container>
+        <Header />
+        <List
+          sx={{
+            width: "100%",
+            bgcolor: "background.paper",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {navigation.map((item) => {
+            return (
+              <Button>
+                <Link to={item.path}>{item.title}</Link>
+              </Button>
+            );
+          })}
+        </List>
+      </Container>
+    </>
   );
 };

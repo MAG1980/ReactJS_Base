@@ -3,17 +3,11 @@ import { React, useState, useEffect, useRef } from "react";
 import {  Box, TextField, Divider, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import {Message} from "./Message";
-// import {CHATS} from "../mocks/chats"
-import {chats as CHATS } from "../imit_chats/imit_chats"
-import { useParams, Redirect } from "react-router";
 
 export const Layout = ( { children } ) => {
-  const {chatId} = useParams();
-  const inputRef = useRef(null);
 	const [messageList, setMessageList] = useState([]);
   const [input, setInput] = useState("");
   let currentInput = "";
-
   useEffect(() => {
     if (
       messageList.length !== 0 &&
@@ -51,26 +45,16 @@ export const Layout = ( { children } ) => {
   function resetInput() {
     setInput("");
   }
- 
+
+   const inputRef = useRef(null);
   useEffect(() => {
-    if (inputRef.current){
-      inputRef.current.focus()
-    }
+	  inputRef.current.focus()
 	})
-
-  // if (!CHATS.find(({id})=>id === chatId)) {
-  //   return <Redirect to="/chats_list/not_found" />
-  // }
-
-    if (!CHATS.find(({id})=>id === chatId)) {
-    return <Redirect to="/chats_list/chat/not_found" />
-  }
  
 	return ( <Box
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                width: "100%"
               }}
             >
               <Box

@@ -9,6 +9,7 @@ import { Header } from "./Components/Header";
 import { Search } from "./Components/Search";
 import { Chat } from "./routes/ChatList/routes";
 import { ChatList } from "./routes/ChatList";
+import { Error_404 } from "./routes/Error_404";
 
 import Main from "./routes/Main";
 
@@ -16,16 +17,13 @@ function App() {
   return (
     <>
       <Switch>
-        <Route path="/chat_list/:chat_list_Id">
-          <Chat />
-        </Route>
         <Route path="/profile" component={Profile}></Route>
         <Route path="/header" component={Header}></Route>
         <Route path="/main" component={Main}></Route>
-        <Route path="/chat_list" component={ChatList}></Route>
+        <Route path="/chats_list" component={ChatList}></Route>
         <Route exact path="/" component={Home}></Route>
         <Route>
-          <h3>Page not found</h3>
+          <Error_404 />
         </Route>
       </Switch>
     </>
