@@ -1,3 +1,5 @@
+import { Provider } from "react-redux";
+import { store } from "./store";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Home, Profile } from "./routes";
 import "./App.css";
@@ -16,16 +18,18 @@ import Main from "./routes/Main";
 function App() {
   return (
     <>
-      <Switch>
-        <Route path="/profile" component={Profile}></Route>
-        <Route path="/header" component={Header}></Route>
-        <Route path="/main" component={Main}></Route>
-        <Route path="/chats_list" component={ChatList}></Route>
-        <Route exact path="/" component={Home}></Route>
-        <Route>
-          <Error_404 />
-        </Route>
-      </Switch>
+      <Provider store={store}>
+        <Switch>
+          <Route path="/profile" component={Profile}></Route>
+          <Route path="/header" component={Header}></Route>
+          <Route path="/main" component={Main}></Route>
+          <Route path="/chats_list" component={ChatList}></Route>
+          <Route exact path="/" component={Home}></Route>
+          <Route>
+            <Error_404 />
+          </Route>
+        </Switch>
+      </Provider>
     </>
   );
 }
