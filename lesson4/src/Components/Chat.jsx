@@ -1,8 +1,10 @@
-import { propTypes } from "prop-types";
-import { Avatar, ListItem, ListItemAvatar, Typography } from "@mui/material";
+import  propTypes from "prop-types";
+import { Link, Avatar, ListItem, ListItemAvatar, Typography } from "@mui/material";
+// import { Link } from "react-router-dom";
 export const Chat = (props)=>{
     return(
-        <ListItem alignItems="flex-start" sx={{
+        <ListItem  component={Link} href={`/chat_list/${props.id}`}
+        alignItems="flex-start" sx={{
             display:'flex',
             justifyContent:'space-between',
             alignItems: 'center',

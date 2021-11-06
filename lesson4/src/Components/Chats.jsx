@@ -22,8 +22,9 @@ export const Chats = ({children}) =>{
         pb:1,
         height:"97%" }}>
              {children}    
-        {chats.map(item => <Chat  key={item.id} name={...item} />)}
-        </List>)} 
+        {chats.map(item => <Chat  key={item.id} {...item} />)}
+        </List>
+        )} 
 
 Chats.propTypes = {
 
