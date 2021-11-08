@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Home, Profile } from "./routes";
 import "./App.css";
 
-import { Layout } from "./Components/Layout";
+import { Layout } from "./Components/MessagesScreen";
 import { Chats } from "./Components/Chats";
 import { Paper } from "@mui/material";
 import { Header } from "./Components/Header";

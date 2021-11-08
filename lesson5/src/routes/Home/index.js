@@ -22,7 +22,9 @@ export const Home = ({ children }) => {
           {navigation.map((item) => {
             return (
               <Button>
-                <Link to={item.path}>{item.title}</Link>
+                <Link to={item.path} style={{ textDecoration: "none" }}>
+                  {item.title}
+                </Link>
               </Button>
             );
           })}

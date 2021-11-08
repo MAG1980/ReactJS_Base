@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import { Chat } from "./routes/Chat";
 import { Route, Link, Switch } from "react-router-dom";
 import { Error_404 } from "../Error_404";
-import { Layout } from "../../Components/Layout";
+import { Layout } from "../../Components/MessagesScreen";
 import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
 
@@ -16,7 +16,7 @@ export const ChatList = ({ children }) => {
   return (
     <Container>
       <Header />
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", height: "90vh" }}>
         {/* <List sx={{ width: "100%", maxWidth: 200, bgcolor: "background.paper" }}>
             {[1, 2, 3].map((value) => (
               <ListItem
@@ -46,7 +46,10 @@ export const ChatList = ({ children }) => {
           }}
         >
           {chats.map((item) => (
-            <Link to={`/chats_list/chat/${item.id}`}>
+            <Link
+              to={`/chats_list/chat/${item.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <Chat key={item.id} {...item} />
             </Link>
           ))}
