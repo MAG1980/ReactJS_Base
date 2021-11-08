@@ -6,8 +6,9 @@ import { Error_404 } from "../Error_404";
 import { Layout } from "../../Components/MessagesScreen";
 // import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
+import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { store } from "../../store/index";
+import { ADD_CHAT, GET_CHATS_LIST } from "../../store/chats/action";
 
 export const ChatList = ({ children }) => {
   // const chats = [
@@ -15,17 +16,22 @@ export const ChatList = ({ children }) => {
   //   { id: "34sfn234", name: "Angelina Jolie" },
   //   { id: "13434sfn234", name: "Megan Fox" },
   // ];
+  const dispatch = useDispatch();
+  const getChats = useCallback(() => {
+    dispatch(GET_CHATS_LIST);
+  }, [dispatch]);
+  console.log(getChats);
 
-  const chats = useSelector((state) => state.chatList);
+  let chats = getChats();
+
+  // const chats = useSelector((state) => state.chatList);
   console.log(chats);
-  const isShow = useSelector((state) => state.isShow);
-  console.log(isShow);
 
   return (
     <Container>
       <Header />
       <Box sx={{ display: "flex", height: "90vh" }}>
-        {/* <List
+        <List
           sx={{
             gridArea: "chats",
             width: "30%",
@@ -50,7 +56,7 @@ export const ChatList = ({ children }) => {
           <Link to={`/chats_list/chat/fake_id`}>
             <Chat id="fake_id" name="Fake Name" />
           </Link>
-        </List> */}
+        </List>
         <Switch>
           <Route path="/chats_list/chat/not_found">
             <Error_404 />
