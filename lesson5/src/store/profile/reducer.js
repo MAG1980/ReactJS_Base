@@ -1,4 +1,4 @@
-import { TOGGLE_SHOW_PROFILE, TOGGLE_SHOW_NAME } from "./action";
+import { TOGGLE_SHOW_PROFILE, CHANGE_NAME, TOGGLE_SHOW_NAME } from "./action";
 
 const initialValues = {
   isShow: false,
@@ -13,11 +13,21 @@ export const profileReducer = (state = initialValues, action) => {
         isShow: !state.isShow,
       };
     }
-    case TOGGLE_SHOW_NAME:
+
+    case TOGGLE_SHOW_NAME: {
       return {
         ...state,
         showName: !state.showName,
       };
+    }
+
+    case CHANGE_NAME: {
+      return {
+        ...state,
+        name: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

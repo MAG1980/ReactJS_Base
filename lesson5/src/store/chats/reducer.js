@@ -1,8 +1,9 @@
 import { nanoid } from "nanoid";
 import { ADD_CHAT } from "./action";
+import { chats } from "../../imit_chats/imit_chats";
 
 const initialChatList = {
-  chatList: [{ name: "", id: "" }],
+  chatList: chats,
 };
 
 export const chatsReducer = (state = initialChatList, action) => {

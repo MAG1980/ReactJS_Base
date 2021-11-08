@@ -4,8 +4,10 @@ import { Chat } from "./routes/Chat";
 import { Route, Link, Switch } from "react-router-dom";
 import { Error_404 } from "../Error_404";
 import { Layout } from "../../Components/MessagesScreen";
-import { chats } from "../../imit_chats/imit_chats";
+// import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
+import { useSelector, useDispatch } from "react-redux";
+import { store } from "../../store/index";
 
 export const ChatList = ({ children }) => {
   // const chats = [
@@ -13,25 +15,17 @@ export const ChatList = ({ children }) => {
   //   { id: "34sfn234", name: "Angelina Jolie" },
   //   { id: "13434sfn234", name: "Megan Fox" },
   // ];
+
+  const chats = useSelector((state) => state.chatList);
+  console.log(chats);
+  const isShow = useSelector((state) => state.isShow);
+  console.log(isShow);
+
   return (
     <Container>
       <Header />
       <Box sx={{ display: "flex", height: "90vh" }}>
-        {/* <List sx={{ width: "100%", maxWidth: 200, bgcolor: "background.paper" }}>
-            {[1, 2, 3].map((value) => (
-              <ListItem
-                key={value}
-                secondaryAction={
-                  <IconButton>
-                    <CommentIcon />
-                  </IconButton>
-                }
-              >
-                <ListItemText primary={`Chat ${value}`} />
-              </ListItem>
-            ))}
-          </List> */}
-        <List
+        {/* <List
           sx={{
             gridArea: "chats",
             width: "30%",
@@ -56,7 +50,7 @@ export const ChatList = ({ children }) => {
           <Link to={`/chats_list/chat/fake_id`}>
             <Chat id="fake_id" name="Fake Name" />
           </Link>
-        </List>
+        </List> */}
         <Switch>
           <Route path="/chats_list/chat/not_found">
             <Error_404 />

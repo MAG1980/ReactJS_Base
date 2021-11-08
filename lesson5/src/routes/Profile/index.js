@@ -5,12 +5,14 @@ import { Header } from "../../Components/Header";
 import { Container } from "@mui/material";
 import {
   TOGGLE_SHOW_PROFILE,
+  CHANGE_NAME,
   TOGGLE_SHOW_NAME,
 } from "../../store/profile/action";
 
 export const Profile = () => {
   const dispatch = useDispatch();
   const isShow = useSelector((state) => state.isShow);
+  console.log(isShow);
   // const { name } = useSelector((state) => state.profile);
   const [value, setValue] = useState("");
 
