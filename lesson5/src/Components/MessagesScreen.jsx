@@ -11,8 +11,13 @@ export const MessagesScreen = ({ children }) => {
   const { chatID } = useParams();
   console.log("chatID: ", chatID);
 
-  let messageList = [];
-  // let messageList = useSelector((store) => store.messagesList[chatID]);
+  let messageList = useSelector(
+    (store) => store.messagesReducer.messagesList[chatID]
+  );
+
+  if (!messageList) {
+    messageList = [];
+  }
 
   // let messageList = useSelector((store) => store.messagesList.chatId);
   const dispatch = useDispatch();
