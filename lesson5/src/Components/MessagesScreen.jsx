@@ -3,12 +3,13 @@ import { React, useState, useEffect, useRef } from "react";
 import { Box, TextField, Divider, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { Message } from "./Message";
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { addMessageActionCreator } from "../store/actionCreators/AddMessageActionCreator";
 
-export const MessagesScreen = ({ children }) => {
-  const { chatID } = useParams();
+export const MessagesScreen = (props) => {
+  // const { chatID } = useParams();
+  const chatID = props.chatID;
   console.log("chatID: ", chatID);
 
   let messageList = useSelector(
