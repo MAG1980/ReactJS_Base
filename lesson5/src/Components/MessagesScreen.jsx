@@ -97,7 +97,9 @@ export const MessagesScreen = ({ children }) => {
             alignItems: "start",
           }}
         >
-          <Message key={messageList.messageID} list={messageList} />
+          {messageList.map((message) => {
+            return <Message key={message.messageID} message={message} />;
+          })}
         </Box>
         <Divider />
       </Box>
