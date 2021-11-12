@@ -1,10 +1,12 @@
 import propTypes from "prop-types";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import {
   List,
   Avatar,
   ListItem,
   ListItemAvatar,
   Typography,
+  Button,
 } from "@mui/material";
 
 export const Chat = (props) => {
@@ -26,6 +28,9 @@ export const Chat = (props) => {
           <Avatar alt={props.name} src="../../public/img/1.jpg" />
         </ListItemAvatar>
         <Typography>{props.name}</Typography>
+        <Button>
+          <CloseRoundedIcon />
+        </Button>
       </ListItem>
     </>
   );

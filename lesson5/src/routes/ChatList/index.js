@@ -12,16 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { GET_CHATS_LIST_ACTION_CREATOR } from "../../store/actionCreators/GET_CHATS_LIST_ACTION_CREATOR";
 
 export const ChatList = ({ children }) => {
-  // const chats = [
-  //   { id: "341n234", name: "Brad Pitt" },
-  //   { id: "34sfn234", name: "Angelina Jolie" },
-  //   { id: "13434sfn234", name: "Megan Fox" },
-  // ];
   const dispatch = useDispatch();
-  // const getChats = useCallback(() => {
-  //   dispatch(GET_CHATS_LIST_ACTION_CREATOR(), [dispatch]);
-  // });
-
   const chats = useSelector((store) => store.chatsReducer.chatList);
   console.log(chats);
 
@@ -32,7 +23,7 @@ export const ChatList = ({ children }) => {
         <List
           sx={{
             gridArea: "chats",
-            width: "30%",
+            width: "40%",
             display: "flex",
             flexDirection: "column",
             border: " 1px solid",
@@ -58,10 +49,16 @@ export const ChatList = ({ children }) => {
           </Link>
         </List>
         <Switch>
-          <Route path="/chats_list/chat/:chatID">
+          {chats.map((item) => (
+            <Route key={item.id} path={`/chats_list/chat/${item.id}`}>
+              <MessagesScreen chatID={item.id} />
+            </Route>
+          ))}
+
+          {/* <Route path="/chats_list/chat/:chatID">
             <MessagesScreen />
-          </Route>
-          <Route path="/chats_list/chat/not_found">
+          </Route> */}
+          <Route path="/chats_list/chat/*">
             <Error404 />
           </Route>
           <Route exact path="/chats_list/chat/">
