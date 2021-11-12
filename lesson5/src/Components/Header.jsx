@@ -20,7 +20,7 @@ export const Header = (props) => {
         </Link>
         {navigation.map((item) => {
           return (
-            <Button sx={{ color: "#fff" }}>
+            <Button sx={{ color: "#fff" }} key={item.path}>
               <Link
                 to={item.path}
                 style={{ textDecoration: "none", color: "#fff" }}

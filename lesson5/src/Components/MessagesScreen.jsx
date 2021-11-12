@@ -7,8 +7,11 @@ import { Message } from "./Message";
 import { chats as CHATS } from "../imit_chats/imit_chats";
 import { useParams, Redirect } from "react-router";
 
-export const Layout = ({ children }) => {
+export const MessagesScreen = ({ children }) => {
   const { chatId } = useParams();
+
+  console.log("chatId: ", chatId);
+
   const inputRef = useRef(null);
   const [messageList, setMessageList] = useState([]);
   const [input, setInput] = useState("");
@@ -30,7 +33,7 @@ export const Layout = ({ children }) => {
 
   function sendMessage(author, text) {
     let message = {
-      id: uniqid(),
+      messageID: uniqid(),
       author: author,
       text: text,
     };
@@ -62,10 +65,10 @@ export const Layout = ({ children }) => {
   //   return <Redirect to="/chats_list/not_found" />
   // }
 
-  if (!CHATS.find(({ id }) => id === chatId)) {
-    return <Redirect to="/chats_list/chat/not_found" />;
-  }
-
+  // if (!CHATS.find(({ id }) => id === chatId)) {
+  //   return <Redirect to="/chats_list/chat/not_found" />;
+  // }
+  console.log(messageList);
   return (
     <Box
       sx={{
@@ -94,7 +97,7 @@ export const Layout = ({ children }) => {
             alignItems: "start",
           }}
         >
-          <Message list={messageList} />
+          <Message key={messageList.messageID} list={messageList} />
         </Box>
         <Divider />
       </Box>

@@ -2,13 +2,14 @@ import { List, Box } from "@mui/material/";
 import Container from "@mui/material/Container";
 import { Chat } from "./routes/Chat";
 import { Route, Link, Switch } from "react-router-dom";
-import { Error_404 } from "../Error_404";
-import { Layout } from "../../Components/MessagesScreen";
+import { Error404 } from "../Error_404";
+import { MessagesScreen } from "../../Components/MessagesScreen";
 // import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
-import { useCallback } from "react";
+import { AddChatModal } from "../../Components/AddChatModal";
+// import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { ADD_CHAT, GET_CHATS_LIST } from "../../store/chats/action";
+// import { GET_CHATS_LIST_ACTION_CREATOR } from "../../store/actionCreators/GET_CHATS_LIST_ACTION_CREATOR";
 
 export const ChatList = ({ children }) => {
   // const chats = [
@@ -17,14 +18,11 @@ export const ChatList = ({ children }) => {
   //   { id: "13434sfn234", name: "Megan Fox" },
   // ];
   const dispatch = useDispatch();
-  const getChats = useCallback(() => {
-    dispatch(GET_CHATS_LIST);
-  }, [dispatch]);
-  console.log(getChats);
+  // const getChats = useCallback(() => {
+  //   dispatch(GET_CHATS_LIST_ACTION_CREATOR(), [dispatch]);
+  // });
 
-  let chats = getChats();
-
-  // const chats = useSelector((state) => state.chatList);
+  const chats = useSelector((store) => store.chatsReducer.chatList);
   console.log(chats);
 
   return (
@@ -45,8 +43,10 @@ export const ChatList = ({ children }) => {
             height: "97%",
           }}
         >
+          <AddChatModal />
           {chats.map((item) => (
             <Link
+              key={item.id}
               to={`/chats_list/chat/${item.id}`}
               style={{ textDecoration: "none" }}
             >
@@ -58,12 +58,14 @@ export const ChatList = ({ children }) => {
           </Link>
         </List>
         <Switch>
-          <Route path="/chats_list/chat/not_found">
-            <Error_404 />
+          <Route path="/chats_list/chat/:chatId">
+            <MessagesScreen />
           </Route>
-          <Route path="/chats_list/chat/:chatId" component={Layout}></Route>
-          <Route path="/chats_list/chat/">
-            <Error_404 />
+          <Route path="/chats_list/chat/not_found">
+            <Error404 />
+          </Route>
+          <Route exact path="/chats_list/chat/">
+            <Error404 />
           </Route>
         </Switch>
       </Box>

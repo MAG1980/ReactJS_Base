@@ -5,8 +5,8 @@ import { Header } from "../../Components/Header";
 import { Container } from "@mui/material";
 import {
   TOGGLE_SHOW_PROFILE,
-  CHANGE_NAME,
-  TOGGLE_SHOW_NAME,
+  // CHANGE_NAME,
+  // TOGGLE_SHOW_NAME,
 } from "../../store/profile/action";
 
 export const Profile = () => {
@@ -16,9 +16,9 @@ export const Profile = () => {
   // const { name } = useSelector((state) => state.profile);
   const [value, setValue] = useState("");
 
-  const setShowName = useCallback(() => {
-    dispatch(TOGGLE_SHOW_NAME);
-  }, [dispatch]);
+  // const setShowName = useCallback(() => {
+  //   dispatch(TOGGLE_SHOW_NAME);
+  // }, [dispatch]);
 
   const handleChange = useCallback((e) => {
     setValue(e.target.value);

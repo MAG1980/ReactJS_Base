@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+// import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import { Paper } from "@mui/material";
-import { Layout } from "../../Components/MessagesScreen";
+import { MessagesScreen } from "../../Components/MessagesScreen";
 import { Chats } from "../../Components/Chats";
 import { Header } from "../../Components/Header";
 import { Search } from "../../Components/Search";
@@ -35,7 +35,7 @@ function Main() {
           <Chats>
             <Search />
           </Chats>
-          <Layout />
+          <MessagesScreen />
         </Paper>
       </Paper>
     </>

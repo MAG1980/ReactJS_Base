@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Layout } from "./Components/Layout";
+import { MessagesScreen } from "./Components/MessagesScreen";
 import { Chats } from "./Components/Chats";
 import { Paper } from "@mui/material";
 import { Header } from "./Components/Header";
@@ -9,7 +9,7 @@ import { Search } from "../Components/Search";
 function App() {
   return (
     <>
-        <Paper
+      <Paper
         evaluation={2}
         variant="outlined"
         sx={{
@@ -35,7 +35,7 @@ function App() {
           <Chats>
             <Search />
           </Chats>
-          <Layout />
+          <MessagesScreen />
         </Paper>
       </Paper>
     </>
