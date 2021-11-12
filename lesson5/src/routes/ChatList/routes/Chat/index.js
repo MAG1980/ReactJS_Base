@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 
 export const Chat = (props) => {
+  const chatID = props.id;
+  console.log("chatID: ", chatID);
   return (
     <>
       <ListItem

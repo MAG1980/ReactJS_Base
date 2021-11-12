@@ -5,14 +5,20 @@ import SendIcon from "@mui/icons-material/Send";
 import { Message } from "./Message";
 import { useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
+import { addMessageActionCreator } from "../store/actionCreators/AddMessageActionCreator";
 
 export const MessagesScreen = ({ children }) => {
-  const { chatId } = useParams();
+  const { chatID } = useParams();
+  console.log("chatID: ", chatID);
 
-  console.log("chatId: ", chatId);
+  let messageList = [];
+  // let messageList = useSelector((store) => store.messagesList[chatID]);
+
+  // let messageList = useSelector((store) => store.messagesList.chatId);
+  const dispatch = useDispatch();
 
   const inputRef = useRef(null);
-  const [messageList, setMessageList] = useState([]);
+  // const [messageList, setMessageList] = useState([]);
   const [input, setInput] = useState("");
   let currentInput = "";
 
@@ -37,7 +43,13 @@ export const MessagesScreen = ({ children }) => {
       text: text,
     };
     let newMessagesArr = [...messageList, message];
-    setMessageList(newMessagesArr);
+
+    let chatMessages = {
+      chatID: chatID,
+      listMessages: newMessagesArr,
+    };
+    dispatch(addMessageActionCreator(newMessagesArr, [dispatch]));
+    // setMessageList(newMessagesArr);
   }
 
   function changeInput(e) {
