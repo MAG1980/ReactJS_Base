@@ -3,9 +3,8 @@ import { React, useState, useEffect, useRef } from "react";
 import { Box, TextField, Divider, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { Message } from "./Message";
-// import {CHATS} from "../mocks/chats"
-import { chats as CHATS } from "../imit_chats/imit_chats";
-import { useParams, Redirect } from "react-router";
+import { useParams } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
 
 export const MessagesScreen = ({ children }) => {
   const { chatId } = useParams();
@@ -68,7 +67,7 @@ export const MessagesScreen = ({ children }) => {
   // if (!CHATS.find(({ id }) => id === chatId)) {
   //   return <Redirect to="/chats_list/chat/not_found" />;
   // }
-  console.log(messageList);
+  // console.log(messageList);
   return (
     <Box
       sx={{
