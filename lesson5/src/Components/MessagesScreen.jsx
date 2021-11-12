@@ -48,7 +48,7 @@ export const MessagesScreen = ({ children }) => {
       chatID: chatID,
       listMessages: newMessagesArr,
     };
-    dispatch(addMessageActionCreator(newMessagesArr, [dispatch]));
+    dispatch(addMessageActionCreator(chatMessages, [dispatch]));
     // setMessageList(newMessagesArr);
   }
 

@@ -1,5 +1,5 @@
 import "./App.css";
-
+import { useParams } from "react-router-dom";
 import { MessagesScreen } from "./Components/MessagesScreen";
 import { Chats } from "./Components/Chats";
 import { Paper } from "@mui/material";
@@ -7,6 +7,7 @@ import { Header } from "./Components/Header";
 import { Search } from "../Components/Search";
 
 function App() {
+  console.log(useParams());
   return (
     <>
       <Paper

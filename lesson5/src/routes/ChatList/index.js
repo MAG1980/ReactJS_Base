@@ -58,7 +58,7 @@ export const ChatList = ({ children }) => {
           </Link>
         </List>
         <Switch>
-          <Route path="/chats_list/chat/:chatId">
+          <Route path="/chats_list/chat/:chatID">
             <MessagesScreen />
           </Route>
           <Route path="/chats_list/chat/not_found">
