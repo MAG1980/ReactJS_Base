@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 export const MessagesScreen = (props) => {
   const chatID = props.chatID;
   const authorName = props.authorName;
-  console.log("chatID: ", chatID);
-  console.log("authorName: ", authorName);
+  // console.log("chatID: ", chatID);
+  // console.log("authorName: ", authorName);
 
   let messageList = useSelector(
     (store) => store.messagesReducer.messagesList[chatID]

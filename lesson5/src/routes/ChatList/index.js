@@ -10,7 +10,7 @@ import { AddChatModal } from "../../Components/AddChatModal";
 import { useSelector, useDispatch } from "react-redux";
 export const ChatList = ({ children }) => {
   const chats = useSelector((store) => store.chatsReducer.chatList);
-  console.log(chats);
+  // console.log(chats);
 
   return (
     <Container>

@@ -14,11 +14,12 @@ import {
 
 export const Chat = (props) => {
   const chatID = props.id;
-  console.log("chatID: ", chatID);
+  // console.log("chatID: ", chatID);
 
   const dispatch = useDispatch();
   const removeChat = useCallback(
-    (chatID) => {
+    (e) => {
+      console.log("chatID: ", chatID);
       dispatch(RemoveChatActionCreator(chatID));
     },
     [chatID]

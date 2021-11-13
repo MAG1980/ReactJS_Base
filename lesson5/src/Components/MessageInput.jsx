@@ -8,7 +8,7 @@ import { addMessageActionCreator } from "../store/actionCreators/AddMessageActio
 
 export const MessageInput = (props) => {
   const chatID = props.chatID;
-  console.log("chatID: ", chatID);
+  // console.log("chatID: ", chatID);
 
   let messageList = props.messageList;
 
@@ -16,7 +16,7 @@ export const MessageInput = (props) => {
   const dispatch = useDispatch();
 
   const inputRef = useRef(null);
-  // const [messageList, setMessageList] = useState([]);
+
   const [input, setInput] = useState("");
   let currentInput = "";
 

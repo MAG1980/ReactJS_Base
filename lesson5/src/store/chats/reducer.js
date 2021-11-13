@@ -7,6 +7,7 @@ const initialChatList = {
 };
 
 export const chatsReducer = (state = initialChatList, action) => {
+  console.log(state.chatList);
   switch (action.type) {
     case CHATS_ADD_CHAT: {
       return {
@@ -15,10 +16,16 @@ export const chatsReducer = (state = initialChatList, action) => {
       };
     }
     case CHATS_REMOVE_CHAT: {
+      console.log(action.id);
+      console.log(
+        state.chatList.filter((chat) => {
+          return chat.id !== action.id;
+        })
+      );
       return {
         ...state,
         chatList: [
-          state.chatList.filter((chat) => {
+          ...state.chatList.filter((chat) => {
             return chat.id !== action.id;
           }),
         ],
