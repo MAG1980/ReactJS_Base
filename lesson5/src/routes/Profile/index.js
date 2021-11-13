@@ -4,8 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { Header } from "../../Components/Header";
 import { Container } from "@mui/material";
 import { ChangeNameActionCreator } from "../../store/actionCreators/ChangeNameActionCreator";
-import { GetNameActionCreator } from "../../store/actionCreators/GetNameActionCreator";
-import { TOGGLE_SHOW_PROFILE } from "../../store/profile/action";
+// import { GetNameActionCreator } from "../../store/actionCreators/GetNameActionCreator";
+// import { TOGGLE_SHOW_PROFILE } from "../../store/profile/action";
+import { ToggleShowProfileActionCreator } from "../../store/actionCreators/ToggleShowProfileActionCreator";
+import {
+  getProfileName,
+  getProfileIsShow,
+} from "../../store/profile/selectors";
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -13,7 +18,8 @@ export const Profile = () => {
 
   const [value, setValue] = useState("");
 
-  const profileUserName = useSelector((state) => state.profileReducer.name);
+  // const profileUserName = useSelector((state) => state.profileReducer.name);
+  const profileUserName = useSelector(getProfileName);
 
   // profileUserName = dispatch(GetNameActionCreator()).name; не работает.
   console.log(profileUserName);
@@ -31,6 +37,10 @@ export const Profile = () => {
     [value]
   );
 
+  const toggleCheckboxShow = useCallback(() => {
+    dispatch(ToggleShowProfileActionCreator());
+  }, [dispatch]);
+
   return (
     <Container>
       <Header />
@@ -39,11 +49,12 @@ export const Profile = () => {
         type="checkbox"
         checked={isShow}
         value={isShow}
-        onChange={() => {
-          dispatch({
-            type: TOGGLE_SHOW_PROFILE,
-          });
-        }}
+        onChange={toggleCheckboxShow}
+        // onChange={() => {
+        //   dispatch({
+        //     type: TOGGLE_SHOW_PROFILE,
+        //   });
+        // }}
       />
       <div>
         <h4>{profileUserName}</h4>

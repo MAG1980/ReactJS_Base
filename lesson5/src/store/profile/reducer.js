@@ -25,13 +25,6 @@ export const profileReducer = (state = initialValues, action) => {
       };
     }
 
-    case GET_PROFILE_NAME: {
-      console.log(state);
-      return {
-        ...state,
-      };
-    }
-
     default: {
       return state;
     }
