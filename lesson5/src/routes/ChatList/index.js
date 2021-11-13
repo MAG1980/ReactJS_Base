@@ -8,9 +8,12 @@ import { MessagesScreen } from "../../Components/MessagesScreen";
 import { Header } from "../../Components/Header";
 import { AddChatModal } from "../../Components/AddChatModal";
 import { useSelector, useDispatch } from "react-redux";
+import { getChatList } from "../../store/chats/selectors";
+
 export const ChatList = ({ children }) => {
-  const chats = useSelector((store) => store.chatsReducer.chatList);
-  // console.log(chats);
+  // const chats = useSelector((store) => store.chatsReducer.chatList);
+  const chats = useSelector(getChatList);
+  console.log(chats);
 
   return (
     <Container>

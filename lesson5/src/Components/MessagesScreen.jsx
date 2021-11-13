@@ -3,6 +3,7 @@ import { Box, TextField, Divider, Button } from "@mui/material";
 import { Message } from "./Message";
 import { MessageInput } from "./MessageInput";
 import { useSelector, useDispatch } from "react-redux";
+import { getMessagesList } from "../store/messages/selectors";
 
 export const MessagesScreen = (props) => {
   const chatID = props.chatID;
