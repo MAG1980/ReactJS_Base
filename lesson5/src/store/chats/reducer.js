@@ -16,12 +16,6 @@ export const chatsReducer = (state = initialChatList, action) => {
       };
     }
     case CHATS_REMOVE_CHAT: {
-      console.log(action.id);
-      console.log(
-        state.chatList.filter((chat) => {
-          return chat.id !== action.id;
-        })
-      );
       return {
         ...state,
         chatList: [

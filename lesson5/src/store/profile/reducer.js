@@ -1,7 +1,7 @@
 import {
   TOGGLE_SHOW_PROFILE,
   PROFILE_CHANGE_NAME,
-  TOGGLE_SHOW_NAME,
+  GET_PROFILE_NAME,
 } from "./action";
 
 const initialValues = {
@@ -18,17 +18,17 @@ export const profileReducer = (state = initialValues, action) => {
       };
     }
 
-    case TOGGLE_SHOW_NAME: {
-      return {
-        ...state,
-        showName: !state.showName,
-      };
-    }
-
     case PROFILE_CHANGE_NAME: {
       return {
         ...state,
         name: action.payload,
+      };
+    }
+
+    case GET_PROFILE_NAME: {
+      console.log(state);
+      return {
+        ...state,
       };
     }
 
