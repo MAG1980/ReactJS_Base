@@ -1,5 +1,8 @@
 import propTypes from "prop-types";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import { RemoveChatActionCreator } from "../../../../store/actionCreators/RemoveChatActionCreator";
+import { useCallback } from "react";
+import { useDispatch } from "react-redux";
 import {
   List,
   Avatar,
@@ -12,6 +15,14 @@ import {
 export const Chat = (props) => {
   const chatID = props.id;
   console.log("chatID: ", chatID);
+
+  const dispatch = useDispatch();
+  const removeChat = useCallback(
+    (chatID) => {
+      dispatch(RemoveChatActionCreator(chatID));
+    },
+    [chatID]
+  );
   return (
     <>
       <ListItem
@@ -29,7 +40,7 @@ export const Chat = (props) => {
         </ListItemAvatar>
         <Typography>{props.name}</Typography>
         <Button>
-          <CloseRoundedIcon />
+          <CloseRoundedIcon type="button" onClick={removeChat} />
         </Button>
       </ListItem>
     </>

@@ -7,12 +7,8 @@ import { MessagesScreen } from "../../Components/MessagesScreen";
 // import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
 import { AddChatModal } from "../../Components/AddChatModal";
-// import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { GET_CHATS_LIST_ACTION_CREATOR } from "../../store/actionCreators/GET_CHATS_LIST_ACTION_CREATOR";
-
 export const ChatList = ({ children }) => {
-  const dispatch = useDispatch();
   const chats = useSelector((store) => store.chatsReducer.chatList);
   console.log(chats);
 
@@ -51,7 +47,7 @@ export const ChatList = ({ children }) => {
         <Switch>
           {chats.map((item) => (
             <Route key={item.id} path={`/chats_list/chat/${item.id}`}>
-              <MessagesScreen chatID={item.id} />
+              <MessagesScreen authorName={item.name} chatID={item.id} />
             </Route>
           ))}
 
