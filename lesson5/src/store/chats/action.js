@@ -1,6 +1,3 @@
-export const ADD_CHAT = "CHATS::ADD_CHAT";
-export const GET_CHATS_LIST = "CHATS::GET_CHATS_LIST";
-export const addChat = (name) => ({
-  type: ADD_CHAT,
-  name,
-});
+export const CHATS_ADD_CHAT = "CHATS_ADD_CHAT";
+export const CHATS_REMOVE_CHAT = "CHATS_REMOVE_CHAT";
+export const GET_CHATS_LIST = "GET_CHATS_LIST";

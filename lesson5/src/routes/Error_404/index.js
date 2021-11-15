@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-export const Error_404 = () => {
+export const Error404 = () => {
   return (
     <Box
       sx={{

@@ -2,29 +2,17 @@ import { List, Box } from "@mui/material/";
 import Container from "@mui/material/Container";
 import { Chat } from "./routes/Chat";
 import { Route, Link, Switch } from "react-router-dom";
-import { Error_404 } from "../Error_404";
-import { Layout } from "../../Components/MessagesScreen";
+import { Error404 } from "../Error_404";
+import { MessagesScreen } from "../../Components/MessagesScreen";
 // import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
-import { useCallback } from "react";
+import { AddChatModal } from "../../Components/AddChatModal";
 import { useSelector, useDispatch } from "react-redux";
-import { ADD_CHAT, GET_CHATS_LIST } from "../../store/chats/action";
+import { getChatList } from "../../store/chats/selectors";
 
 export const ChatList = ({ children }) => {
-  // const chats = [
-  //   { id: "341n234", name: "Brad Pitt" },
-  //   { id: "34sfn234", name: "Angelina Jolie" },
-  //   { id: "13434sfn234", name: "Megan Fox" },
-  // ];
-  const dispatch = useDispatch();
-  const getChats = useCallback(() => {
-    dispatch(GET_CHATS_LIST);
-  }, [dispatch]);
-  console.log(getChats);
-
-  let chats = getChats();
-
-  // const chats = useSelector((state) => state.chatList);
+  // const chats = useSelector((store) => store.chatsReducer.chatList);
+  const chats = useSelector(getChatList);
   console.log(chats);
 
   return (
@@ -34,7 +22,7 @@ export const ChatList = ({ children }) => {
         <List
           sx={{
             gridArea: "chats",
-            width: "30%",
+            width: "40%",
             display: "flex",
             flexDirection: "column",
             border: " 1px solid",
@@ -45,8 +33,10 @@ export const ChatList = ({ children }) => {
             height: "97%",
           }}
         >
+          <AddChatModal />
           {chats.map((item) => (
             <Link
+              key={item.id}
               to={`/chats_list/chat/${item.id}`}
               style={{ textDecoration: "none" }}
             >
@@ -58,12 +48,20 @@ export const ChatList = ({ children }) => {
           </Link>
         </List>
         <Switch>
-          <Route path="/chats_list/chat/not_found">
-            <Error_404 />
+          {chats.map((item) => (
+            <Route key={item.id} path={`/chats_list/chat/${item.id}`}>
+              <MessagesScreen authorName={item.name} chatID={item.id} />
+            </Route>
+          ))}
+
+          {/* <Route path="/chats_list/chat/:chatID">
+            <MessagesScreen />
+          </Route> */}
+          <Route path="/chats_list/chat/*">
+            <Error404 />
           </Route>
-          <Route path="/chats_list/chat/:chatId" component={Layout}></Route>
-          <Route path="/chats_list/chat/">
-            <Error_404 />
+          <Route exact path="/chats_list/chat/">
+            <Error404 />
           </Route>
         </Switch>
       </Box>

@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { ADD_CHAT, GET_CHATS_LIST } from "./action";
+import { CHATS_ADD_CHAT, CHATS_REMOVE_CHAT, GET_CHATS_LIST } from "./action";
 import { chats } from "../../imit_chats/imit_chats";
 
 const initialChatList = {
@@ -7,15 +7,26 @@ const initialChatList = {
 };
 
 export const chatsReducer = (state = initialChatList, action) => {
+  console.log(state.chatList);
   switch (action.type) {
-    case ADD_CHAT: {
+    case CHATS_ADD_CHAT: {
       return {
         ...state,
-        chatList: [...state.chatList, { name: "newName", id: nanoid() }],
+        chatList: [...state.chatList, { name: action.name, id: nanoid() }],
+      };
+    }
+    case CHATS_REMOVE_CHAT: {
+      return {
+        ...state,
+        chatList: [
+          ...state.chatList.filter((chat) => {
+            return chat.id !== action.id;
+          }),
+        ],
       };
     }
     case GET_CHATS_LIST: {
-      return state.chatList;
+      return { ...state };
     }
     default: {
       return state;

@@ -1,30 +1,45 @@
-import React from "react";
+import { React, componentDidMount } from "react";
 import { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Header } from "../../Components/Header";
 import { Container } from "@mui/material";
+import { ChangeNameActionCreator } from "../../store/actionCreators/ChangeNameActionCreator";
+// import { GetNameActionCreator } from "../../store/actionCreators/GetNameActionCreator";
+// import { TOGGLE_SHOW_PROFILE } from "../../store/profile/action";
+import { ToggleShowProfileActionCreator } from "../../store/actionCreators/ToggleShowProfileActionCreator";
 import {
-  TOGGLE_SHOW_PROFILE,
-  CHANGE_NAME,
-  TOGGLE_SHOW_NAME,
-} from "../../store/profile/action";
+  getProfileName,
+  getProfileIsShow,
+} from "../../store/profile/selectors";
 
 export const Profile = () => {
   const dispatch = useDispatch();
-  const isShow = useSelector((state) => state.isShow);
-  console.log(isShow);
-  // const { name } = useSelector((state) => state.profile);
+  const isShow = useSelector((state) => state.profileReducer.isShow);
+
   const [value, setValue] = useState("");
 
-  const setShowName = useCallback(() => {
-    dispatch(TOGGLE_SHOW_NAME);
+  // const profileUserName = useSelector((state) => state.profileReducer.name);
+  const profileUserName = useSelector(getProfileName);
+
+  // profileUserName = dispatch(GetNameActionCreator()).name; не работает.
+  console.log(profileUserName);
+  const setName = useCallback(() => {
+    dispatch(ChangeNameActionCreator(value));
+    console.log(value);
+    setValue("");
+  }, [dispatch, value]);
+
+  const handleChange = useCallback(
+    (e) => {
+      setValue(e.target.value);
+      console.log(value);
+    },
+    [value]
+  );
+
+  const toggleCheckboxShow = useCallback(() => {
+    dispatch(ToggleShowProfileActionCreator());
   }, [dispatch]);
-
-  const handleChange = useCallback((e) => {
-    setValue(e.target.value);
-  }, []);
-
-  const setName = () => {};
 
   return (
     <Container>
@@ -34,17 +49,18 @@ export const Profile = () => {
         type="checkbox"
         checked={isShow}
         value={isShow}
-        onChange={() => {
-          dispatch({
-            type: TOGGLE_SHOW_PROFILE,
-          });
-        }}
+        onChange={toggleCheckboxShow}
+        // onChange={() => {
+        //   dispatch({
+        //     type: TOGGLE_SHOW_PROFILE,
+        //   });
+        // }}
       />
       <div>
-        <h4>Profile</h4>
+        <h4>{profileUserName}</h4>
       </div>
       <div>
-        <input type="text" value={value} onChange={handleChange} />
+        <input value={value} type="text" onChange={handleChange} />
       </div>
       <div>
         <button onClick={setName}>Change Name</button>

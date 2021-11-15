@@ -1,69 +1,22 @@
-import uniqid from "uniqid";
-import { React, useState, useEffect, useRef } from "react";
 import { Box, TextField, Divider, Button } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
+
 import { Message } from "./Message";
-// import {CHATS} from "../mocks/chats"
-import { chats as CHATS } from "../imit_chats/imit_chats";
-import { useParams, Redirect } from "react-router";
+import { MessageInput } from "./MessageInput";
+import { useSelector, useDispatch } from "react-redux";
+import { getMessagesList } from "../store/messages/selectors";
 
-export const Layout = ({ children }) => {
-  const { chatId } = useParams();
-  const inputRef = useRef(null);
-  const [messageList, setMessageList] = useState([]);
-  const [input, setInput] = useState("");
-  let currentInput = "";
+export const MessagesScreen = (props) => {
+  const chatID = props.chatID;
+  const authorName = props.authorName;
+  // console.log("chatID: ", chatID);
+  // console.log("authorName: ", authorName);
 
-  useEffect(() => {
-    if (
-      messageList.length !== 0 &&
-      messageList[messageList.length - 1].author !== "Bot"
-    ) {
-      let timerId = setTimeout(() => {
-        sendMessage("Bot", "Привет от бота!");
-      }, 1500);
-      return () => {
-        clearTimeout(timerId);
-      };
-    }
-  }, [messageList]);
+  let messageList = useSelector(
+    (store) => store.messagesReducer.messagesList[chatID]
+  );
 
-  function sendMessage(author, text) {
-    let message = {
-      id: uniqid(),
-      author: author,
-      text: text,
-    };
-    let newMessagesArr = [...messageList, message];
-    setMessageList(newMessagesArr);
-  }
-
-  function changeInput(e) {
-    currentInput = e.target.value;
-    setInput(currentInput);
-  }
-  function addMessage(e) {
-    e.preventDefault();
-    sendMessage("user", input);
-    console.log(input);
-    resetInput();
-  }
-  function resetInput() {
-    setInput("");
-  }
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  });
-
-  // if (!CHATS.find(({id})=>id === chatId)) {
-  //   return <Redirect to="/chats_list/not_found" />
-  // }
-
-  if (!CHATS.find(({ id }) => id === chatId)) {
-    return <Redirect to="/chats_list/chat/not_found" />;
+  if (!messageList) {
+    messageList = [];
   }
 
   return (
@@ -94,42 +47,17 @@ export const Layout = ({ children }) => {
             alignItems: "start",
           }}
         >
-          <Message list={messageList} />
+          {messageList.map((message) => {
+            return <Message key={message.messageID} message={message} />;
+          })}
         </Box>
         <Divider />
       </Box>
-      <Box
-        onSubmit={addMessage}
-        component="form"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          p: 1,
-          bgcolor: "background.main",
-        }}
-      >
-        <TextField
-          inputRef={inputRef}
-          value={input}
-          onChange={changeInput}
-          id="filled-basic"
-          label="Type Something"
-          variant="standard"
-          name="textInput"
-          sx={{ width: "100%", autoComplete: "off" }}
-        />
-        <Button
-          size="small"
-          type="submit"
-          variant="contained"
-          endIcon={<SendIcon />}
-          sx={{
-            minWidth: 30,
-            minHeight: 30,
-            borderRadius: "50%",
-          }}
-        ></Button>
-      </Box>
+      <MessageInput
+        messageList={messageList}
+        chatID={chatID}
+        authorName={authorName}
+      />
     </Box>
   );
 };
