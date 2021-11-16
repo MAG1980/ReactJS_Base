@@ -1,6 +1,10 @@
 import { MESSAGES_ADD_MESSAGE } from "../messages/action";
-export const addMessageActionCreator = (chatMessages) => ({
+export const addMessageActionCreator = (chatMessage) => ({
   type: MESSAGES_ADD_MESSAGE,
-  chatID: chatMessages.chatID,
-  listMessages: chatMessages.listMessages,
+  chatID: chatMessage.chatID,
+  message: {
+    messageID: chatMessage.messageID,
+    author: chatMessage.author,
+    text: chatMessage.text,
+  },
 });

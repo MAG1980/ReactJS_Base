@@ -35,18 +35,19 @@ export const MessageInput = (props) => {
   }, [messageList]);
 
   function sendMessage(author, text) {
-    let message = {
+    let chatMessage = {
+      chatID: chatID,
       messageID: uniqid(),
       author: author,
       text: text,
     };
-    let newMessagesArr = [...messageList, message];
+    // let newMessagesArr = [...messageList, message];
 
-    let chatMessages = {
-      chatID: chatID,
-      listMessages: newMessagesArr,
-    };
-    dispatch(addMessageActionCreator(chatMessages, [dispatch]));
+    // let chatMessages = {
+    //   chatID: chatID,
+    //   listMessages: newMessagesArr,
+    // };
+    dispatch(addMessageActionCreator(chatMessage, [dispatch]));
     // setMessageList(newMessagesArr);
   }
 
