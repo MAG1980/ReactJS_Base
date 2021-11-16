@@ -4,7 +4,8 @@ import { Box, TextField, Divider, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addMessageActionCreator } from "../store/actionCreators/AddMessageActionCreator";
+// import { addMessageActionCreator } from "../store/actionCreators/AddMessageActionCreator";
+import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
 
 export const MessageInput = (props) => {
   const chatID = props.chatID;
@@ -41,7 +42,8 @@ export const MessageInput = (props) => {
       text: text,
     };
     console.log(chatMessage);
-    dispatch(addMessageActionCreator(chatID, chatMessage, [dispatch]));
+    // dispatch(addMessageActionCreator(chatID, chatMessage, [dispatch]));
+    dispatch(addMessageWithThunk(chatID, chatMessage, [dispatch]));
   }
 
   function changeInput(e) {
