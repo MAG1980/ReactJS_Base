@@ -1,4 +1,4 @@
-import uniqid from "uniqid";
+import { nanoid } from "nanoid";
 import { React, useState, useEffect, useRef } from "react";
 import { Box, TextField, Divider, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
@@ -20,35 +20,28 @@ export const MessageInput = (props) => {
   const [input, setInput] = useState("");
   let currentInput = "";
 
-  useEffect(() => {
-    if (
-      messageList.length !== 0 &&
-      messageList[messageList.length - 1].author !== "Bot"
-    ) {
-      let timerId = setTimeout(() => {
-        sendMessage("Bot", "Привет от бота!");
-      }, 1500);
-      return () => {
-        clearTimeout(timerId);
-      };
-    }
-  }, [messageList]);
+  // useEffect(() => {
+  //   if (
+  //     messageList.length !== 0 &&
+  //     messageList[messageList.length - 1].author !== "Bot"
+  //   ) {
+  //     let timerId = setTimeout(() => {
+  //       sendMessage("Bot", "Привет от бота!");
+  //     }, 1500);
+  //     return () => {
+  //       clearTimeout(timerId);
+  //     };
+  //   }
+  // }, [messageList]);
 
   function sendMessage(author, text) {
     let chatMessage = {
-      chatID: chatID,
-      messageID: uniqid(),
+      id: nanoid(),
       author: author,
       text: text,
     };
-    // let newMessagesArr = [...messageList, message];
-
-    // let chatMessages = {
-    //   chatID: chatID,
-    //   listMessages: newMessagesArr,
-    // };
-    dispatch(addMessageActionCreator(chatMessage, [dispatch]));
-    // setMessageList(newMessagesArr);
+    console.log(chatMessage);
+    dispatch(addMessageActionCreator(chatID, chatMessage, [dispatch]));
   }
 
   function changeInput(e) {
