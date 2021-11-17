@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import IconButton from "@mui/material/IconButton";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
@@ -50,11 +51,13 @@ export const AddChatModal = () => {
       >
         <Box sx={style}>
           <TextField
+            autoFocus
             onChange={changeStateValue}
             id="outlined-basic"
             label="NewUser Name"
             variant="outlined"
             required
+            sx={{ width: "80%" }}
           />
           <Button onClick={addChat}>
             <AddCircleOutlineSharpIcon fontSize="large" />
