@@ -6,6 +6,7 @@ import { Header } from "./Components/Header";
 import { ChatList } from "./routes/ChatList";
 import { Error404 } from "./routes/Error_404";
 import { TestAPI } from "./routes/API";
+import { TestAPIWithMiddleware } from "./routes/API_with_middleWare";
 
 import Main from "./routes/Main";
 
@@ -20,6 +21,10 @@ function App() {
         <Route path="/main" component={Main}></Route>
         <Route path="/chats_list" component={ChatList}></Route>
         <Route path="/testAPI" component={TestAPI}></Route>
+        <Route
+          path="/testAPI_wit_middleware"
+          component={TestAPIWithMiddleware}
+        ></Route>
         <Route exact path="/" component={Home}></Route>
         <Route>
           <Error404 />

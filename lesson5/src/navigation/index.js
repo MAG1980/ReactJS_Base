@@ -12,4 +12,5 @@ export const navigation = [
     title: "ChatList",
   },
   { path: "/testAPI", title: "Test API" },
+  { path: "/testAPI_wit_middleware", title: "Test API with middleware" },
 ];
