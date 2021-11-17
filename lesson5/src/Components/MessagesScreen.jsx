@@ -1,5 +1,5 @@
+import { forwardRef, useEffect } from "react";
 import { Box, TextField, Divider, Button } from "@mui/material";
-
 import { Message } from "./Message";
 import { MessageInput } from "./MessageInput";
 import { useSelector, useDispatch } from "react-redux";
@@ -8,8 +8,6 @@ import { getMessagesList } from "../store/messages/selectors";
 export const MessagesScreen = (props) => {
   const chatID = props.chatID;
   const authorName = props.authorName;
-  // console.log("chatID: ", chatID);
-  // console.log("authorName: ", authorName);
 
   let messageList = useSelector(
     (store) => store.messagesReducer.messagesList[chatID]
@@ -18,6 +16,14 @@ export const MessagesScreen = (props) => {
   if (!messageList) {
     messageList = [];
   }
+  // 17.11.21
+
+  const inputRef = forwardRef();
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  });
 
   return (
     <Box
@@ -54,9 +60,9 @@ export const MessagesScreen = (props) => {
         <Divider />
       </Box>
       <MessageInput
-        messageList={messageList}
         chatID={chatID}
         authorName={authorName}
+        inputRef={inputRef}
       />
     </Box>
   );

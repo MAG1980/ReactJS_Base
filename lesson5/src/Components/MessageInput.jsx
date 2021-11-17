@@ -1,39 +1,17 @@
 import { nanoid } from "nanoid";
 import { React, useState, useEffect, useRef } from "react";
-import { Box, TextField, Divider, Button } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-import { useSelector, useDispatch } from "react-redux";
-// import { addMessageActionCreator } from "../store/actionCreators/AddMessageActionCreator";
+import { useDispatch } from "react-redux";
+
 import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
 
-export const MessageInput = (props) => {
-  const chatID = props.chatID;
-  // console.log("chatID: ", chatID);
-
-  let messageList = props.messageList;
-
-  // let messageList = useSelector((store) => store.messagesList.chatId);
+export const MessageInput = ({ authorName, chatID, inputRef }) => {
   const dispatch = useDispatch();
-
-  const inputRef = useRef(null);
 
   const [input, setInput] = useState("");
   let currentInput = "";
-
-  // useEffect(() => {
-  //   if (
-  //     messageList.length !== 0 &&
-  //     messageList[messageList.length - 1].author !== "Bot"
-  //   ) {
-  //     let timerId = setTimeout(() => {
-  //       sendMessage("Bot", "Привет от бота!");
-  //     }, 1500);
-  //     return () => {
-  //       clearTimeout(timerId);
-  //     };
-  //   }
-  // }, [messageList]);
 
   function sendMessage(author, text) {
     let chatMessage = {
@@ -52,7 +30,7 @@ export const MessageInput = (props) => {
   }
   function addMessage(e) {
     e.preventDefault();
-    sendMessage(props.authorName, input);
+    sendMessage(authorName, input);
     console.log(input);
     resetInput();
   }
@@ -60,11 +38,6 @@ export const MessageInput = (props) => {
     setInput("");
   }
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  });
   return (
     <Box
       onSubmit={addMessage}
