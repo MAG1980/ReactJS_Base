@@ -1,43 +1,7 @@
-import { nanoid } from "nanoid";
-import { React, useState, useEffect, useRef } from "react";
 import { Box, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 
-import { useDispatch } from "react-redux";
-
-import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
-
-export const MessageInput = ({ authorName, chatID, inputRef }) => {
-  const dispatch = useDispatch();
-
-  const [input, setInput] = useState("");
-  let currentInput = "";
-
-  function sendMessage(author, text) {
-    let chatMessage = {
-      id: nanoid(),
-      author: author,
-      text: text,
-    };
-    console.log(chatMessage);
-    // dispatch(addMessageActionCreator(chatID, chatMessage, [dispatch]));
-    dispatch(addMessageWithThunk(chatID, chatMessage, [dispatch]));
-  }
-
-  function changeInput(e) {
-    currentInput = e.target.value;
-    setInput(currentInput);
-  }
-  function addMessage(e) {
-    e.preventDefault();
-    sendMessage(authorName, input);
-    console.log(input);
-    resetInput();
-  }
-  function resetInput() {
-    setInput("");
-  }
-
+export const MessageInput = ({ inputRef, addMessage, input, changeInput }) => {
   return (
     <Box
       onSubmit={addMessage}

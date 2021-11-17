@@ -1,9 +1,10 @@
-import { forwardRef, useEffect } from "react";
-import { Box, TextField, Divider, Button } from "@mui/material";
+import { forwardRef, useState, useEffect } from "react";
+import { Box, Divider } from "@mui/material";
 import { Message } from "./Message";
 import { MessageInput } from "./MessageInput";
 import { useSelector, useDispatch } from "react-redux";
-import { getMessagesList } from "../store/messages/selectors";
+import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
+import { nanoid } from "nanoid";
 
 export const MessagesScreen = (props) => {
   const chatID = props.chatID;
@@ -24,6 +25,36 @@ export const MessagesScreen = (props) => {
       inputRef.current.focus();
     }
   });
+
+  const dispatch = useDispatch();
+
+  const [input, setInput] = useState("");
+  let currentInput = "";
+
+  function sendMessage(author, text) {
+    let chatMessage = {
+      id: nanoid(),
+      author: author,
+      text: text,
+    };
+    console.log(chatMessage);
+    // dispatch(addMessageActionCreator(chatID, chatMessage, [dispatch]));
+    dispatch(addMessageWithThunk(chatID, chatMessage, [dispatch]));
+  }
+
+  function changeInput(e) {
+    currentInput = e.target.value;
+    setInput(currentInput);
+  }
+  function addMessage(e) {
+    e.preventDefault();
+    sendMessage(authorName, input);
+    console.log(input);
+    resetInput();
+  }
+  function resetInput() {
+    setInput("");
+  }
 
   return (
     <Box
@@ -63,6 +94,9 @@ export const MessagesScreen = (props) => {
         chatID={chatID}
         authorName={authorName}
         inputRef={inputRef}
+        addMessage={addMessage}
+        input={input}
+        changeInput={changeInput}
       />
     </Box>
   );
