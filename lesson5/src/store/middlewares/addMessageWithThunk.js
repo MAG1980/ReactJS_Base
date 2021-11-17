@@ -19,9 +19,5 @@ export const addMessageWithThunk =
       return () => {
         clearTimeout(timerId);
       };
-      // setTimeout(
-      //   () => dispatch(addMessageActionCreator(chatId, botMessage)),
-      //   2000
-      // );
     }
   };

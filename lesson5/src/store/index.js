@@ -8,7 +8,7 @@ import storage from "redux-persist/lib/storage"; // localStorage
 
 const persistConfig = {
   key: "root",
-  storage,
+  storage, //Берётся из redux-persist. По умолчанию - localstorage.
 };
 
 const persistedReducer = persistReducer(persistConfig, storeCombineReducer);
