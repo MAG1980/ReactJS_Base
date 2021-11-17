@@ -11,4 +11,5 @@ export const navigation = [
     path: "/chats_list",
     title: "ChatList",
   },
+  { path: "/testAPI", title: "Test API" },
 ];

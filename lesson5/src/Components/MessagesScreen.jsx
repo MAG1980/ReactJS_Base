@@ -1,10 +1,6 @@
-import { forwardRef, useState, useEffect } from "react";
 import { Box, Divider } from "@mui/material";
 import { Message } from "./Message";
 import { MessageInput } from "./MessageInput";
-import { useSelector, useDispatch } from "react-redux";
-import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
-import { nanoid } from "nanoid";
 
 import { withMessagesScreen } from "../hocs/withMessagesScreen";
 
