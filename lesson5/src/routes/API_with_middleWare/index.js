@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAPIDataActionCreator } from "../../store/actionCreators/getAPIDataActionCreator";
 import {
   Box,
   Button,
@@ -12,39 +14,29 @@ import {
 } from "@mui/material";
 import { Header } from "../../Components/Header";
 import { Error } from "../../Components/Error";
-const TEST_API_URL =
-  "https://fakerapi.it/api/v1/images?_quantity=12&_type=kittens&_height=150";
+import {
+  getTestAPIData,
+  getTestAPILoading,
+  getTestAPIError,
+} from "../../store/TestAPIWithMiddleware/selectors";
 
 export const TestAPIWithMiddleware = () => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [data, setData] = useState([]);
+  const dispatch = useDispatch();
+  const isError = useSelector(getTestAPIError);
+  const isLoading = useSelector(getTestAPILoading);
+  const data = useSelector(getTestAPIData);
 
-  const getData = async () => {
-    try {
-      setLoading(true);
-      setError(false);
-      setData([]);
-
-      const response = await fetch(TEST_API_URL);
-      if (!response.ok) {
-        throw new Error("");
-      }
-      const result = await response.json();
-      setData(result.data);
-      console.log(result);
-      console.log(result.data);
-    } catch (e) {
-      console.error(e);
-      setError(true);
-    }
-    setLoading(false);
-    console.log(data);
+  const getData = () => {
+    dispatch(getAPIDataActionCreator);
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  // console.log(data);
+  // console.log(isError);
+  // console.log(isLoading);
 
   return (
     <Box>
@@ -54,14 +46,14 @@ export const TestAPIWithMiddleware = () => {
           <Typography variant="h1" align="center">
             Test API with middleware
           </Typography>
-          {loading && (
+          {isLoading && (
             <Box sx={{ textAlign: "center" }}>
               <CircularProgress />
             </Box>
           )}
-          {error && <Error reload={getData} />}
+          {isError && <Error reload={getData} />}
           <Button onClick={getData}>Get Data</Button>
-          {!loading && data.length > 0 && (
+          {!isLoading && data.length > 0 && (
             <ImageList sx={{ display: "flex", flexWrap: "wrap" }}>
               {data.map((dataItem) => (
                 <ImageListItem key={dataItem.url} sx={{ width: "20%" }}>

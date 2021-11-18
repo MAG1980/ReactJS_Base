@@ -7,7 +7,7 @@ import { MessagesScreen } from "../../Components/MessagesScreen";
 // import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
 import { AddChatModal } from "../../Components/AddChatModal";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getChatList } from "../../store/chats/selectors";
 
 export const ChatList = ({ children }) => {

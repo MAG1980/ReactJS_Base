@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import { MESSAGES_ADD_MESSAGE } from "./action";
 
 const initialMessagesList = {
@@ -9,7 +8,6 @@ const initialMessagesList = {
 };
 
 export const messagesReducer = (state = initialMessagesList, action) => {
-  let arr = [];
   switch (action.type) {
     case MESSAGES_ADD_MESSAGE: {
       let key = action.chatID;

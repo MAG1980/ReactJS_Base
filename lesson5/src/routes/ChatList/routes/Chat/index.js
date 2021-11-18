@@ -22,7 +22,7 @@ export const Chat = (props) => {
       console.log("chatID: ", chatID);
       dispatch(RemoveChatActionCreator(chatID));
     },
-    [chatID]
+    [chatID, dispatch]
   );
   return (
     <>

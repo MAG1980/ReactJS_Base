@@ -12,8 +12,7 @@ import {
 } from "@mui/material";
 import { Header } from "../../Components/Header";
 import { Error } from "../../Components/Error";
-const TEST_API_URL =
-  "https://fakerapi.it/api/v1/images?_quantity=12&_type=kittens&_height=150";
+import { TEST_API_URL } from "../../helpers/API";
 
 export const TestAPI = () => {
   const [loading, setLoading] = useState(false);

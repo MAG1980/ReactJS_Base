@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import IconButton from "@mui/material/IconButton";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
@@ -30,8 +29,8 @@ export const AddChatModal = () => {
 
   const addChat = useCallback(() => {
     handleClose();
-    dispatch(addChatActionCreator(inputValue), [dispatch]);
-  });
+    dispatch(addChatActionCreator(inputValue));
+  }, [dispatch, inputValue]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

@@ -1,4 +1,4 @@
-import { Box, Button, Alert } from "@mui/material";
+import { Button, Alert } from "@mui/material";
 
 export const Error = ({ reload }) => {
   return (
