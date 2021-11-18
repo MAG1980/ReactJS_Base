@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useFetchListData } from "../../hooks/useFetchListData";
 import {
   Box,
@@ -40,7 +40,7 @@ export const TestAPIwithHook = () => {
           {!loading && data.length > 0 && (
             <ImageList sx={{ display: "flex", flexWrap: "wrap" }}>
               {data.map((dataItem) => (
-                <ImageListItem key={dataItem.url} sx={{ width: "20%" }}>
+                <ImageListItem key={dataItem.title} sx={{ width: "20%" }}>
                   <img
                     sx={{ width: "100%", objectFit: "cover" }}
                     src={`${dataItem.url}?w=248&fit=crop&auto=format`}

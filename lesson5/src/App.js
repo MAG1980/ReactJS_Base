@@ -1,7 +1,6 @@
 import { Switch, Route } from "react-router-dom";
 import { Home, Profile } from "./routes";
 import "./App.css";
-import { useSelector } from "react-redux";
 import { Header } from "./Components/Header";
 import { ChatList } from "./routes/ChatList";
 import { Error404 } from "./routes/Error_404";

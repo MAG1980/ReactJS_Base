@@ -16,11 +16,6 @@ import {
 } from "@mui/material";
 import { Header } from "../../Components/Header";
 import { Error } from "../../Components/Error";
-import {
-  getTestAPIData,
-  getTestAPILoading,
-  getTestAPIError,
-} from "../../store/TestAPIWithMiddleware/selectors";
 
 export const TestAPIwithFabricatedReducer = () => {
   const dispatch = useDispatch();
@@ -58,7 +53,7 @@ export const TestAPIwithFabricatedReducer = () => {
           {!isLoading && data.length > 0 && (
             <ImageList sx={{ display: "flex", flexWrap: "wrap" }}>
               {data.map((dataItem) => (
-                <ImageListItem key={dataItem.url} sx={{ width: "20%" }}>
+                <ImageListItem key={dataItem.title} sx={{ width: "20%" }}>
                   <img
                     sx={{ width: "100%", objectFit: "cover" }}
                     src={`${dataItem.url}?w=248&fit=crop&auto=format`}
