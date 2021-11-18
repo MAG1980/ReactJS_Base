@@ -8,12 +8,11 @@ import { Error404 } from "./routes/Error_404";
 import { TestAPI } from "./routes/API";
 import { TestAPIWithMiddleware } from "./routes/API_with_middleWare";
 import { TestAPIwithHook } from "./routes/API_with_hook";
+import { TestAPIwithFabricatedReducer } from "./routes/API_with_fabricated_reducer";
 
 import Main from "./routes/Main";
 
 function App() {
-  let name = useSelector((store) => store.name);
-  console.log(name);
   return (
     <>
       <Switch>
@@ -27,6 +26,10 @@ function App() {
           component={TestAPIWithMiddleware}
         ></Route>
         <Route path="/TestAPIwithHook" component={TestAPIwithHook}></Route>
+        <Route
+          path="/TestAPIwithFabricatedReducer"
+          component={TestAPIwithFabricatedReducer}
+        ></Route>
 
         <Route exact path="/" component={Home}></Route>
         <Route>
