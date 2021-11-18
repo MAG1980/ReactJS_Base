@@ -1,4 +1,4 @@
-import { MESSAGES_ADD_MESSAGE } from "./action";
+import { MESSAGES_ADD_MESSAGE, MESSAGES_DELETE_MESSAGES } from "./action";
 
 const initialMessagesList = {
   messagesList: {
@@ -22,12 +22,17 @@ export const messagesReducer = (state = initialMessagesList, action) => {
 
       let newArr = [...messagesList[key], action.message];
       console.log(messagesList);
-      // let newMessagesList = {...messagesList, messagesList[key]};
 
       return {
         ...state,
         messagesList: { ...messagesList, [key]: newArr },
       };
+    }
+
+    case MESSAGES_DELETE_MESSAGES: {
+      let messagesList = { ...state.messagesList };
+      delete messagesList[action.chatID];
+      return { ...state, messagesList };
     }
 
     default: {

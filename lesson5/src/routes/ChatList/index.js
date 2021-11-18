@@ -13,7 +13,6 @@ import { getChatList } from "../../store/chats/selectors";
 export const ChatList = ({ children }) => {
   // const chats = useSelector((store) => store.chatsReducer.chatList);
   const chats = useSelector(getChatList);
-  console.log(chats);
 
   return (
     <Container>
