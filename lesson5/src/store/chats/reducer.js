@@ -7,7 +7,7 @@ const initialChatList = {
 };
 
 export const chatsReducer = (state = initialChatList, action) => {
-  console.log(state.chatList);
+  // console.log(state.chatList);
   switch (action.type) {
     case CHATS_ADD_CHAT: {
       return {

@@ -29,8 +29,8 @@ export const AddChatModal = () => {
 
   const addChat = useCallback(() => {
     handleClose();
-    dispatch(addChatActionCreator(inputValue), [dispatch]);
-  });
+    dispatch(addChatActionCreator(inputValue));
+  }, [dispatch, inputValue]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -50,11 +50,13 @@ export const AddChatModal = () => {
       >
         <Box sx={style}>
           <TextField
+            autoFocus
             onChange={changeStateValue}
             id="outlined-basic"
             label="NewUser Name"
             variant="outlined"
             required
+            sx={{ width: "80%" }}
           />
           <Button onClick={addChat}>
             <AddCircleOutlineSharpIcon fontSize="large" />

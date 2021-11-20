@@ -1,4 +1,4 @@
-import { React, componentDidMount } from "react";
+import { React } from "react";
 import { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Header } from "../../Components/Header";
@@ -9,7 +9,7 @@ import { ChangeNameActionCreator } from "../../store/actionCreators/ChangeNameAc
 import { ToggleShowProfileActionCreator } from "../../store/actionCreators/ToggleShowProfileActionCreator";
 import {
   getProfileName,
-  getProfileIsShow,
+  // getProfileIsShow,
 } from "../../store/profile/selectors";
 
 export const Profile = () => {

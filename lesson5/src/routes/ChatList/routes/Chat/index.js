@@ -1,6 +1,7 @@
 import propTypes from "prop-types";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { RemoveChatActionCreator } from "../../../../store/actionCreators/RemoveChatActionCreator";
+import { MessagesDelete } from "../../../../store/actionCreators/MessagesDelete";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -21,8 +22,9 @@ export const Chat = (props) => {
     (e) => {
       console.log("chatID: ", chatID);
       dispatch(RemoveChatActionCreator(chatID));
+      dispatch(MessagesDelete(chatID));
     },
-    [chatID]
+    [chatID, dispatch]
   );
   return (
     <>

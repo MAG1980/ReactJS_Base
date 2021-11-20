@@ -1,24 +1,19 @@
-import { Box, TextField, Divider, Button } from "@mui/material";
-
+import { Box, Divider } from "@mui/material";
 import { Message } from "./Message";
 import { MessageInput } from "./MessageInput";
-import { useSelector, useDispatch } from "react-redux";
-import { getMessagesList } from "../store/messages/selectors";
 
-export const MessagesScreen = (props) => {
-  const chatID = props.chatID;
-  const authorName = props.authorName;
-  // console.log("chatID: ", chatID);
-  // console.log("authorName: ", authorName);
+import { withMessagesScreen } from "../hocs/withMessagesScreen";
+import { withForwardRef } from "../hocs/withForwardRef";
 
-  let messageList = useSelector(
-    (store) => store.messagesReducer.messagesList[chatID]
-  );
-
-  if (!messageList) {
-    messageList = [];
-  }
-
+export const MessagesScreenRender = ({
+  messageList,
+  chatID,
+  authorName,
+  forwardRef,
+  addMessage,
+  input,
+  changeInput,
+}) => {
   return (
     <Box
       sx={{
@@ -54,10 +49,17 @@ export const MessagesScreen = (props) => {
         <Divider />
       </Box>
       <MessageInput
-        messageList={messageList}
         chatID={chatID}
         authorName={authorName}
+        inputRef={forwardRef}
+        addMessage={addMessage}
+        input={input}
+        changeInput={changeInput}
       />
     </Box>
   );
 };
+
+export const MessagesScreen = withForwardRef(
+  withMessagesScreen(MessagesScreenRender)
+);
