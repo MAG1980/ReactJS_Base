@@ -3,12 +3,13 @@ import { Message } from "./Message";
 import { MessageInput } from "./MessageInput";
 
 import { withMessagesScreen } from "../hocs/withMessagesScreen";
+import { withForwardRef } from "../hocs/withForwardRef";
 
 export const MessagesScreenRender = ({
   messageList,
   chatID,
   authorName,
-  inputRef,
+  forwardRef,
   addMessage,
   input,
   changeInput,
@@ -50,7 +51,7 @@ export const MessagesScreenRender = ({
       <MessageInput
         chatID={chatID}
         authorName={authorName}
-        inputRef={inputRef}
+        inputRef={forwardRef}
         addMessage={addMessage}
         input={input}
         changeInput={changeInput}
@@ -59,4 +60,6 @@ export const MessagesScreenRender = ({
   );
 };
 
-export const MessagesScreen = withMessagesScreen(MessagesScreenRender);
+export const MessagesScreen = withForwardRef(
+  withMessagesScreen(MessagesScreenRender)
+);

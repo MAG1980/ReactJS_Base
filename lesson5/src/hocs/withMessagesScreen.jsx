@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
 import { nanoid } from "nanoid";
@@ -15,13 +15,6 @@ export const withMessagesScreen = (Component) => {
     if (!messageList) {
       messageList = [];
     }
-
-    const inputRef = forwardRef();
-    useEffect(() => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    });
 
     const dispatch = useDispatch();
 
@@ -57,7 +50,6 @@ export const withMessagesScreen = (Component) => {
         messageList={messageList}
         chatID={chatID}
         authorName={authorName}
-        inputRef={inputRef}
         addMessage={addMessage}
         input={input}
         changeInput={changeInput}
