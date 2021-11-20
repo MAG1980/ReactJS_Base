@@ -1,10 +1,14 @@
-import { MESSAGES_ADD_MESSAGE, MESSAGES_DELETE_MESSAGES } from "./action";
+import {
+  MESSAGES_ADD_MESSAGE,
+  MESSAGES_SET_BOT_TIMER_ID,
+  MESSAGES_DELETE_MESSAGES,
+} from "./action";
 
 const initialMessagesList = {
   messagesList: {
     chatID: [],
-    a: [],
   },
+  botTimerID: null,
 };
 
 export const messagesReducer = (state = initialMessagesList, action) => {
@@ -16,17 +20,17 @@ export const messagesReducer = (state = initialMessagesList, action) => {
         console.log("Not own props");
         messagesList[key] = [];
       }
-      console.log(action.message);
-
-      console.log(key);
 
       let newArr = [...messagesList[key], action.message];
-      console.log(messagesList);
 
       return {
         ...state,
         messagesList: { ...messagesList, [key]: newArr },
       };
+    }
+
+    case MESSAGES_SET_BOT_TIMER_ID: {
+      return { ...state, botTimerID: action.timerID };
     }
 
     case MESSAGES_DELETE_MESSAGES: {

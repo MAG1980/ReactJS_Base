@@ -5,3 +5,7 @@ export const getRootMessages = (state) => {
 export const getMessagesList = (state) => {
   return getRootMessages(state).messagesList;
 };
+
+export const getBotTimerID = (state) => {
+  return state.botTimerID;
+};
