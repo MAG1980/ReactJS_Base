@@ -18,4 +18,12 @@ export const navigation = [
     path: "/TestAPIwithFabricatedReducer",
     title: "Test API with Fabricated Reducer",
   },
+  {
+    path: "/signup",
+    title: "Signup",
+  },
+  {
+    path: "/login",
+    title: "Login",
+  },
 ];
