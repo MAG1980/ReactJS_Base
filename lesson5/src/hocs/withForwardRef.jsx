@@ -1,8 +1,8 @@
-import { forwardRef, useEffect } from "react";
+import { createRef, useEffect } from "react";
 
 export const withForwardRef = (Component) => {
   return (props) => {
-    const inputRef = forwardRef();
+    const inputRef = createRef();
     useEffect(() => {
       if (inputRef.current) {
         inputRef.current.focus();
