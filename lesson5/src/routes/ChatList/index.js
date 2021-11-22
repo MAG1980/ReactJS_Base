@@ -13,7 +13,11 @@ import { useCallback, useState, React } from "react";
 import { useDispatch } from "react-redux";
 // import { addChatActionCreator } from "../../store/actionCreators/AddChatActionCreator";
 import { addChatActionCreator } from "../../store/chats/action";
+import { addChatWithThunk } from "../../store/chats/action";
 import { nanoid } from "nanoid";
+import { createChat } from "../../helpers/index";
+import { RemoveChatActionCreator } from "../../store/actionCreators/RemoveChatActionCreator";
+import { MessagesDelete } from "../../store/actionCreators/MessagesDelete";
 
 export const ChatList = ({ children }) => {
   // const chats = useSelector((store) => store.chatsReducer.chatList);
@@ -34,13 +38,25 @@ export const ChatList = ({ children }) => {
 
   const addChat = useCallback(() => {
     handleClose();
-    let id = nanoid();
-    // const chat = { id, name: inputValue };
-    dispatch(addChatActionCreator(id, inputValue));
-  }, [dispatch, inputValue]);
+    // let id = nanoid();
+    // const chat = { name: inputValue };
+    dispatch(addChatWithThunk(createChat(inputValue)));
+  }, []);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  //removing chats
+
+  // console.log("chatID: ", chatID);
+
+  const removeChat = useCallback(
+    (chatID) => {
+      dispatch(RemoveChatActionCreator(chatID));
+      dispatch(MessagesDelete(chatID));
+    },
+    [dispatch]
+  );
 
   return (
     <Container>
@@ -73,7 +89,7 @@ export const ChatList = ({ children }) => {
               to={`/chats_list/chat/${item.id}`}
               style={{ textDecoration: "none" }}
             >
-              <Chat key={item.id} {...item} />
+              <Chat name={item.name} removeChat={() => removeChat(item.id)} />
             </Link>
           ))}
           <Link to={`/chats_list/chat/fake_id`}>

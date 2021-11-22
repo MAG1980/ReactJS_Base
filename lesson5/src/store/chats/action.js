@@ -1,5 +1,5 @@
 import { chatsListRef, profileRef, messagesRef } from "../../services/firebase";
-import { mapChatSnapshotToChat } from "../../helpers/mapChatSnapshotToChat";
+import { mapChatSnapshotToChat } from "../../helpers/index";
 
 export const CHATS_ADD_CHAT = "CHATS_ADD_CHAT";
 export const CHATS_REMOVE_CHAT = "CHATS_REMOVE_CHAT";
