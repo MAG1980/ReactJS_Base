@@ -54,9 +54,9 @@ function App() {
           component={TestAPIwithFabricatedReducer}
         />
         <PublicRoute authenticated={authed} exact path="/" component={Home} />
-        <PublicRoute authenticated={authed}>
+        {/* <PublicRoute authenticated={authed}>
           <Error404 />
-        </PublicRoute>
+        </PublicRoute> */}
 
         <PrivateRoute
           authenticated={authed}

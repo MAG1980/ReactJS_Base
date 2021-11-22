@@ -4,15 +4,33 @@ import { Chat } from "./routes/Chat";
 import { Route, Link, Switch } from "react-router-dom";
 import { Error404 } from "../Error_404";
 import { MessagesScreen } from "../../Components/MessagesScreen";
-// import { chats } from "../../imit_chats/imit_chats";
 import { Header } from "../../Components/Header";
 import { AddChatModal } from "../../Components/AddChatModal";
 import { useSelector } from "react-redux";
 import { getChatList } from "../../store/chats/selectors";
 
+import { useCallback, useState, React } from "react";
+import { useDispatch } from "react-redux";
+import { addChatActionCreator } from "../../store/actionCreators/AddChatActionCreator";
+
 export const ChatList = ({ children }) => {
   // const chats = useSelector((store) => store.chatsReducer.chatList);
   const chats = useSelector(getChatList);
+
+  const [inputValue, setInputValue] = useState("");
+  const changeStateValue = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const dispatch = useDispatch();
+
+  const addChat = useCallback(() => {
+    handleClose();
+    dispatch(addChatActionCreator(inputValue));
+  }, [dispatch, inputValue]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Container>
@@ -32,7 +50,13 @@ export const ChatList = ({ children }) => {
             height: "97%",
           }}
         >
-          <AddChatModal />
+          <AddChatModal
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+            addChat={addChat}
+            changeStateValue={changeStateValue}
+          />
           {chats.map((item) => (
             <Link
               key={item.id}
