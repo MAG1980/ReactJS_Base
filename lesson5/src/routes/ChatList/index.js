@@ -11,11 +11,19 @@ import { getChatList } from "../../store/chats/selectors";
 
 import { useCallback, useState, React } from "react";
 import { useDispatch } from "react-redux";
-import { addChatActionCreator } from "../../store/actionCreators/AddChatActionCreator";
+// import { addChatActionCreator } from "../../store/actionCreators/AddChatActionCreator";
+import { addChatActionCreator } from "../../store/chats/action";
+import { nanoid } from "nanoid";
 
 export const ChatList = ({ children }) => {
   // const chats = useSelector((store) => store.chatsReducer.chatList);
-  const chats = useSelector(getChatList);
+  let chats = [];
+  const Сhats = useSelector(getChatList);
+  console.log("Сhats: ", Сhats);
+  if (!Object.keys(Сhats).length == 0) {
+    chats = Object.values(Сhats);
+  }
+  console.log(chats);
 
   const [inputValue, setInputValue] = useState("");
   const changeStateValue = (e) => {
@@ -26,7 +34,9 @@ export const ChatList = ({ children }) => {
 
   const addChat = useCallback(() => {
     handleClose();
-    dispatch(addChatActionCreator(inputValue));
+    let id = nanoid();
+    // const chat = { id, name: inputValue };
+    dispatch(addChatActionCreator(id, inputValue));
   }, [dispatch, inputValue]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
