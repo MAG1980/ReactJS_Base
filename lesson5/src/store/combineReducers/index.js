@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { profileReducer } from "../profile/reducer";
 import { chatsReducer } from "../chats/reducer";
 import { messagesReducer } from "../messages/reducer";
+import { userReducer } from "../user/reducer";
 import { testAPIReducer } from "../TestAPIWithMiddleware/index";
 
 import { newData } from "../newTestApi";
@@ -12,4 +13,5 @@ export const storeCombineReducer = combineReducers({
   chatsReducer,
   testAPIReducer,
   NEW_DATA: newData.reducer,
+  userReducer,
 });

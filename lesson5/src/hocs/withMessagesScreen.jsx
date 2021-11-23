@@ -1,11 +1,22 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
+// import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
+import { addMessageWithThunk } from "../store/messages/action";
 import { nanoid } from "nanoid";
+import {
+  onTrackingAddMessageWithThunk,
+  onTrackingRemoveMessageWithThunk,
+  offTrackingAddMessageWithThunk,
+  offTrackingRemoveMessageWithThunk,
+} from "../store/messages/action.js";
+import { createMessage } from "../helpers/index";
+import { getUserId } from "../store/user/selectors";
 
 export const withMessagesScreen = (Component) => {
   return (props) => {
     const chatID = props.chatID;
+    const userId = "JQi7yL8fpVWAtkAlkZ77WIvID6J3";
+    // const userId = useSelector(getUserId);
     const authorName = props.authorName;
 
     let messageList = useSelector(
@@ -22,14 +33,25 @@ export const withMessagesScreen = (Component) => {
     let currentInput = "";
 
     function sendMessage(author, text) {
-      let chatMessage = {
-        id: nanoid(),
-        author: author,
-        text: text,
-      };
-      console.log(chatMessage);
-      dispatch(addMessageWithThunk(chatID, chatMessage, [dispatch]));
+      const chatMessage = createMessage(userId, text);
+      dispatch(addMessageWithThunk(chatMessage, chatID));
+      // let chatMessage = {
+      //   id: nanoid(),
+      //   author: author,
+      //   text: text,
+      // };
+      // console.log(chatMessage);
+      // dispatch(addMessageWithThunk(chatID, chatMessage, [dispatch]));
     }
+    useEffect(() => {
+      dispatch(onTrackingAddMessageWithThunk(chatID));
+      dispatch(onTrackingRemoveMessageWithThunk(chatID));
+
+      return () => {
+        dispatch(offTrackingAddMessageWithThunk(chatID));
+        dispatch(offTrackingRemoveMessageWithThunk(chatID));
+      };
+    });
 
     function changeInput(e) {
       currentInput = e.target.value;

@@ -42,7 +42,7 @@ export const sendMessageWithThunk = (author, text, chatId) => (dispatch) => {
   dispatch(addMessage(botMessage, chatId));
 };
 
-export const adddMessageWithThunk = (message, chatId) => {
+export const addMessageWithThunk = (message, chatId) => {
   messagesRef.child(chatId).push(message);
 };
 

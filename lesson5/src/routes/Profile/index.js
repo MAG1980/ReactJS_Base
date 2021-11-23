@@ -22,7 +22,7 @@ export const Profile = () => {
   const profileUserName = useSelector(getProfileName);
 
   // profileUserName = dispatch(GetNameActionCreator()).name; не работает.
-  console.log(profileUserName);
+
   const setName = useCallback(() => {
     dispatch(ChangeNameActionCreator(value));
     console.log(value);

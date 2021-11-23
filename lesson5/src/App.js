@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import firebase from "firebase";
+// import firebase from "firebase";
 import { Switch, Route } from "react-router-dom";
 import { Home, Profile } from "./routes";
 import "./App.css";
@@ -16,18 +16,28 @@ import Main from "./routes/Main";
 import "./services/firebase";
 import { PublicRoute } from "./hocs/PublicRoute";
 import { PrivateRoute } from "./hocs/PrivateRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { initAuthAction } from "./store/user/actions";
+import { getIsAuth } from "./store/user/selectors";
+// import { getUser } from "./store/user/selectors";
 
 function App() {
-  const [authed, setAuthed] = useState(false);
+  // const [authed, setAuthed] = useState(false);
+
+  const authed = useSelector(getIsAuth);
+  console.log(authed);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        setAuthed(true);
-      } else {
-        setAuthed(false);
-      }
-    });
+    dispatch(initAuthAction);
+
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     setAuthed(true);
+    //   } else {
+    //     setAuthed(false);
+    //   }
+    // });
   }, []);
   return (
     <>

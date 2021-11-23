@@ -2,6 +2,7 @@ import {
   MESSAGES_ADD_MESSAGE,
   MESSAGES_SET_BOT_TIMER_ID,
   MESSAGES_DELETE_MESSAGES,
+  REMOVE_MESSAGES_BY_CHAT_ID,
 } from "./action";
 
 const initialMessagesList = {
@@ -14,19 +15,39 @@ const initialMessagesList = {
 export const messagesReducer = (state = initialMessagesList, action) => {
   switch (action.type) {
     case MESSAGES_ADD_MESSAGE: {
-      let key = action.chatID;
-      let messagesList = { ...state.messagesList };
-      if (!messagesList.hasOwnProperty(action.chatID)) {
-        console.log("Not own props");
-        messagesList[key] = [];
-      }
+      const { message, chatId } = action.payload;
 
-      let newArr = [...messagesList[key], action.message];
-
-      return {
-        ...state,
-        messagesList: { ...messagesList, [key]: newArr },
+      const newMessagesList = { ...state.messagesList };
+      newMessagesList[chatId] = {
+        ...(newMessagesList[chatId] || {}),
+        [message.id]: message,
       };
+      return {
+        messagesList: newMessagesList,
+      };
+
+      // let key = action.chatID;
+      // let messagesList = { ...state.messagesList };
+      // if (!messagesList.hasOwnProperty(action.chatID)) {
+      //   console.log("Not own props");
+      //   messagesList[key] = [];
+      // }
+
+      // let newArr = [...messagesList[key], action.message];
+
+      // return {
+      //   ...state,
+      //   messagesList: { ...messagesList, [key]: newArr },
+      // };
+    }
+
+    case REMOVE_MESSAGES_BY_CHAT_ID: {
+      if (!state.messagesList.hasOwnProperty(action.payload)) {
+        return state;
+      }
+      const newMessagesList = { ...state.messagesList };
+      delete newMessagesList[action.payload];
+      return { messagesList: newMessagesList };
     }
 
     case MESSAGES_SET_BOT_TIMER_ID: {
