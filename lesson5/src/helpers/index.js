@@ -10,11 +10,10 @@ export const mapMessageSnapshotToMessage = (snapshot) => ({
   id: snapshot.key,
 });
 
-export const createChat = (name) => ({
-  name,
-});
+export const createChat = (name) => {
+  return { name };
+};
 
-export const mapChatSnapshotToChat = (snapshot) => ({
-  ...snapshot.val(),
-  id: snapshot.key,
-});
+export const mapChatSnapshotToChat = (snapshot) => {
+  return { ...snapshot.val(), id: snapshot.key }; // { id: snapshot.key, name: "name"}
+};

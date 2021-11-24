@@ -12,6 +12,12 @@ export const addChatActionCreator = (id, name) => ({
   name,
 });
 
+export const addChat = (chat) => ({
+  // chat = { id: snapshot.key, name: "name"}
+  type: CHATS_ADD_CHAT,
+  payload: chat,
+});
+
 export const setChats = (chats) => ({
   type: SET_CHATS,
   payload: chats,
@@ -36,7 +42,9 @@ export const addChatWithThunk = (chat) => {
 
 export const onTrackingAddChatWithThunk = (dispatch) => {
   chatsListRef.on("child_added", (snapshot) => {
-    dispatch(CHATS_ADD_CHAT(mapChatSnapshotToChat(snapshot)));
+    const ac = mapChatSnapshotToChat(snapshot);
+    console.log(ac);
+    dispatch(addChat(ac));
   });
 };
 

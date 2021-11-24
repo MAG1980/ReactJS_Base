@@ -15,8 +15,9 @@ import { getUserId } from "../store/user/selectors";
 export const withMessagesScreen = (Component) => {
   return (props) => {
     const chatID = props.chatID;
-    const userId = "JQi7yL8fpVWAtkAlkZ77WIvID6J3";
-    // const userId = useSelector(getUserId);
+
+    const userId = useSelector(getUserId);
+    console.log(userId);
     const authorName = props.authorName;
 
     let messageList = useSelector(

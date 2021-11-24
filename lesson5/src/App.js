@@ -7,7 +7,7 @@ import { Header } from "./Components/Header";
 import { Login } from "./Components/Login";
 import { SignUp } from "./Components/SignUp";
 import { ChatList } from "./routes/ChatList";
-import { Error404 } from "./routes/Error_404";
+// import { Error404 } from "./routes/Error_404";
 import { TestAPI } from "./routes/API";
 import { TestAPIWithMiddleware } from "./routes/API_with_middleWare";
 import { TestAPIwithHook } from "./routes/API_with_hook";
@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { initAuthAction } from "./store/user/actions";
 import { getIsAuth } from "./store/user/selectors";
 // import { getUser } from "./store/user/selectors";
+import { testRef } from "./services/firebase";
 
 function App() {
   // const [authed, setAuthed] = useState(false);
@@ -27,7 +28,6 @@ function App() {
   const authed = useSelector(getIsAuth);
   console.log(authed);
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(initAuthAction);
 

@@ -24,7 +24,12 @@ export const chatsReducer = (state = initialChatList, action) => {
       return {
         chatList: {
           ...state.chatList,
-          [action.id]: { name: action.name, id: action.id },
+          [action.payload.id]: {
+            name: action.payload.name,
+            id: action.payload.id,
+          }, // {snapshot1.key:{ id: snapshot1.key, name: "name"},
+          //                          ...
+          //  snapshot2.key:{ id: snapshot2.key, name: "name"}, }
         },
       };
     }

@@ -12,7 +12,7 @@ import { getChatList } from "../../store/chats/selectors";
 import { useCallback, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 // import { addChatActionCreator } from "../../store/actionCreators/AddChatActionCreator";
-import { addChatActionCreator } from "../../store/chats/action";
+// import { addChatActionCreator } from "../../store/chats/action";
 import {
   addChatWithThunk,
   removeChatWithThunk,
@@ -21,7 +21,7 @@ import {
   offTrackingAddChatWithThunk,
   offTrackingRemoveChatWithThunk,
 } from "../../store/chats/action";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 import { createChat } from "../../helpers/index";
 // import { RemoveChatActionCreator } from "../../store/actionCreators/RemoveChatActionCreator";
 // import { MessagesDelete } from "../../store/actionCreators/MessagesDelete";
@@ -31,15 +31,19 @@ export const ChatList = ({ children }) => {
   // const chats = useSelector((store) => store.chatsReducer.chatList);
   let chats = [];
   const Сhats = useSelector(getChatList);
+  // Сhats = {snapshot1.key:{ id: snapshot1.key, name: "name"},
+  //                          ...
+  //  snapshot2.key:{ id: snapshot2.key, name: "name"}, }
   console.log("Сhats: ", Сhats);
   if (!Object.keys(Сhats).length == 0) {
-    chats = Object.values(Сhats);
+    chats = Object.values(Сhats); // [{ id: snapshot.key, name: "name"}, ...,{...}];
   }
   console.log(chats);
 
   const [inputValue, setInputValue] = useState("");
   const changeStateValue = (e) => {
     setInputValue(e.target.value);
+    console.log(inputValue);
   };
 
   const dispatch = useDispatch();
@@ -48,8 +52,9 @@ export const ChatList = ({ children }) => {
     handleClose();
     // let id = nanoid();
     // const chat = { name: inputValue };
+    console.log(inputValue);
     dispatch(addChatWithThunk(createChat(inputValue)));
-  }, []);
+  }, [inputValue]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
