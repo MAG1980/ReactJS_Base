@@ -11,7 +11,9 @@ export const mapMessageSnapshotToMessage = (snapshot) => ({
 });
 
 export const createChat = (name) => {
-  return { name };
+  const chat = { name };
+  console.log("createChat chat: ", chat);
+  return chat;
 };
 
 export const mapChatSnapshotToChat = (snapshot) => {

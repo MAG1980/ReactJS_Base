@@ -40,7 +40,7 @@ export const ChatList = ({ children }) => {
   }
   console.log(chats);
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("init");
   const changeStateValue = (e) => {
     setInputValue(e.target.value);
     console.log(inputValue);
@@ -78,7 +78,7 @@ export const ChatList = ({ children }) => {
       dispatch(offTrackingAddChatWithThunk);
       dispatch(offTrackingRemoveChatWithThunk);
     };
-  });
+  }, []);
 
   return (
     <Container>

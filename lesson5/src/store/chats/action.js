@@ -36,7 +36,7 @@ export const removeChatWithThunk = (chatID) => (dispatch) => {
   });
 };
 
-export const addChatWithThunk = (chat) => {
+export const addChatWithThunk = (chat) => () => {
   chatsListRef.push(chat);
 };
 

@@ -52,7 +52,7 @@ export const withMessagesScreen = (Component) => {
         dispatch(offTrackingAddMessageWithThunk(chatID));
         dispatch(offTrackingRemoveMessageWithThunk(chatID));
       };
-    });
+    }, [chatID]);
 
     function changeInput(e) {
       currentInput = e.target.value;
