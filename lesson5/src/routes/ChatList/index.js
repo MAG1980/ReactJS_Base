@@ -21,6 +21,7 @@ import {
   offTrackingAddChatWithThunk,
   offTrackingRemoveChatWithThunk,
 } from "../../store/chats/action";
+import { removeMessagesByChatIDWithThunk } from "../../store/messages/action";
 // import { nanoid } from "nanoid";
 import { createChat } from "../../helpers/index";
 // import { RemoveChatActionCreator } from "../../store/actionCreators/RemoveChatActionCreator";
@@ -64,7 +65,7 @@ export const ChatList = ({ children }) => {
       // dispatch(RemoveChatActionCreator(chatID));
       // dispatch(MessagesDelete(chatID));
       dispatch(removeChatWithThunk(chatID));
-      // dispatch(removeMessagesByChatIDWithThunk(chatID));
+      dispatch(removeMessagesByChatIDWithThunk(chatID));
     },
     [dispatch]
   );

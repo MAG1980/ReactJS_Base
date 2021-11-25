@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
 import { addMessageWithThunk } from "../store/messages/action";
+import {
+  getMessagesReducer,
+  getMessagesList,
+  getChatMessagesListById,
+} from "../store/messages/selectors";
 import { nanoid } from "nanoid";
 import {
   onTrackingAddMessageWithThunk,
@@ -15,18 +20,26 @@ import { getUserId } from "../store/user/selectors";
 export const withMessagesScreen = (Component) => {
   return (props) => {
     const chatID = props.chatID;
+    console.log("chatID: ", chatID);
 
     const userId = useSelector(getUserId);
-    console.log(userId);
+    // console.log(userId);
     const authorName = props.authorName;
 
-    let messageList = useSelector(
-      (store) => store.messagesReducer.messagesList[chatID]
-    );
+    // Список сообщений всех чатов
+    // let messageList = useSelector(getMessagesList);
+    // console.log(messageList);
 
-    if (!messageList) {
-      messageList = [];
-    }
+    let currentChatmessageList = useSelector(getChatMessagesListById(chatID));
+    // messageList = [{author, text,id},..., {author, text,id}]
+
+    // let messageList = useSelector(
+    //   (store) => store.messagesReducer.messagesList[chatID]
+    // );
+
+    // if (!messageList) {
+    //   messageList = [];
+    // }
 
     const dispatch = useDispatch();
 
@@ -52,7 +65,7 @@ export const withMessagesScreen = (Component) => {
         dispatch(offTrackingAddMessageWithThunk(chatID));
         dispatch(offTrackingRemoveMessageWithThunk(chatID));
       };
-    }, [chatID]);
+    }, []);
 
     function changeInput(e) {
       currentInput = e.target.value;
@@ -70,9 +83,9 @@ export const withMessagesScreen = (Component) => {
     return (
       <Component
         {...props}
-        messageList={messageList}
+        messageList={currentChatmessageList}
         chatID={chatID}
-        authorName={authorName}
+        // authorName={authorName}
         addMessage={addMessage}
         input={input}
         changeInput={changeInput}

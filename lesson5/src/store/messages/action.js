@@ -9,6 +9,7 @@ export const MESSAGES_DELETE_MESSAGES = "MESSAGES_DELETE_MESSAGES";
 export const MESSAGES_SET_BOT_TIMER_ID = "MESSAGES_SET_BOT_TIMER_ID";
 export const REMOVE_MESSAGES_BY_CHAT_ID = "REMOVE_MESSAGES_BY_CHAT_ID";
 
+//message = {id: snapshot.key, {author: '26lo6J579HPINaffXcaXgEGgBkU2', text: '2'}}
 export const addMessage = (message, chatId) => ({
   type: MESSAGES_ADD_MESSAGE,
   payload: {
@@ -17,10 +18,12 @@ export const addMessage = (message, chatId) => ({
   },
 });
 
-export const removeMessagesByChatID = (chatId) => ({
-  type: REMOVE_MESSAGES_BY_CHAT_ID,
-  payload: chatId,
-});
+export const removeMessagesByChatID = (chatId) => {
+  return {
+    type: REMOVE_MESSAGES_BY_CHAT_ID,
+    payload: chatId,
+  };
+};
 
 export const removeMessagesByChatIDWithThunk = (chatId) => (dispatch) => {
   messagesRef.child(chatId).remove(() => {
@@ -42,8 +45,8 @@ export const sendMessageWithThunk = (author, text, chatId) => (dispatch) => {
   dispatch(addMessage(botMessage, chatId));
 };
 
-export const addMessageWithThunk = (message, chatId) => {
-  messagesRef.child(chatId).push(message);
+export const addMessageWithThunk = (message, chatId) => () => {
+  messagesRef.child(chatId).push(message); //chatMessage: {author,text}
 };
 
 export const onTrackingAddMessageWithThunk = (chatId) => (dispatch) => {

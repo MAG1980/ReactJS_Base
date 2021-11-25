@@ -5,10 +5,13 @@ export const createMessage = (author, text) => ({
   text,
 });
 
-export const mapMessageSnapshotToMessage = (snapshot) => ({
-  ...snapshot.val(),
-  id: snapshot.key,
-});
+export const mapMessageSnapshotToMessage = (snapshot) => {
+  console.log(snapshot.val());
+  return {
+    ...snapshot.val(),
+    id: snapshot.key,
+  }; //{id: snapshot.key, {author: '26lo6J579HPINaffXcaXgEGgBkU2', text: '2'}}
+};
 
 export const createChat = (name) => {
   const chat = { name };

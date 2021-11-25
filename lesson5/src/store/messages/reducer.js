@@ -15,6 +15,10 @@ const initialMessagesList = {
 export const messagesReducer = (state = initialMessagesList, action) => {
   switch (action.type) {
     case MESSAGES_ADD_MESSAGE: {
+      //action.payload = {
+      // chatId,
+      // {id: snapshot.key, { author: "26lo6J579HPINaffXcaXgEGgBkU2", text: "2" }
+      // };
       const { message, chatId } = action.payload;
 
       const newMessagesList = { ...state.messagesList };
@@ -42,6 +46,7 @@ export const messagesReducer = (state = initialMessagesList, action) => {
     }
 
     case REMOVE_MESSAGES_BY_CHAT_ID: {
+      console.log(action.payload);
       if (!state.messagesList.hasOwnProperty(action.payload)) {
         return state;
       }

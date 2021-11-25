@@ -42,8 +42,10 @@ export const MessagesScreenRender = ({
             alignItems: "start",
           }}
         >
+          {/* // messageList = [{author, text, id},..., {author, text, id}] */}
           {messageList.map((message) => {
-            return <Message key={message.messageID} message={message} />;
+            // return <Message key={message.messageID} message={message} />;
+            return <Message key={message.id} message={message} />;
           })}
         </Box>
         <Divider />
