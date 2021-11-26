@@ -1,4 +1,4 @@
-import { auth } from "../../services/firebase";
+// import { auth } from "../../services/firebase";
 import { LOGIN_USER, LOGOUT_USER } from "./actions";
 
 const initialState = {
