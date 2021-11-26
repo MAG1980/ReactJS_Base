@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { addMessageWithThunk } from "../store/middlewares/addMessageWithThunk";
 import { addMessageWithThunk } from "../store/messages/action";
+import { getUserName } from "../store/user/selectors";
 import {
   getMessagesReducer,
   getMessagesList,
@@ -31,6 +32,7 @@ export const withMessagesScreen = (Component) => {
     // console.log(messageList);
 
     let currentChatmessageList = useSelector(getChatMessagesListById(chatID));
+    const userName = useSelector(getUserName);
     // messageList = [{author, text,id},..., {author, text,id}]
 
     // let messageList = useSelector(
@@ -47,7 +49,7 @@ export const withMessagesScreen = (Component) => {
     let currentInput = "";
 
     function sendMessage(author, text) {
-      const chatMessage = createMessage(userId, text);
+      const chatMessage = createMessage(userName, text);
       dispatch(addMessageWithThunk(chatMessage, chatID));
       // let chatMessage = {
       //   id: nanoid(),
