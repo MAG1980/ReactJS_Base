@@ -9,6 +9,7 @@ export const Message = (props) => {
           justifyContent: "space-around",
         }}
       >
+        {/* message = {author, text, id} */}
         <p className="message__name">{props.message.author}:</p>
         <p>{props.message.text}</p>
       </Box>

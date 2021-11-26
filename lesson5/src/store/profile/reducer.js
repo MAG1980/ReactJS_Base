@@ -1,7 +1,7 @@
 import {
   TOGGLE_SHOW_PROFILE,
   PROFILE_CHANGE_NAME,
-  GET_PROFILE_NAME,
+  // GET_PROFILE_NAME,
 } from "./action";
 
 const initialValues = {
