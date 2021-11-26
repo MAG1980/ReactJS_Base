@@ -26,4 +26,8 @@ export const navigation = [
     path: "/login",
     title: "Login",
   },
+  {
+    path: "/logout",
+    title: "LogOut ",
+  },
 ];

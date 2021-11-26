@@ -21,6 +21,7 @@ import { initAuthAction } from "./store/user/actions";
 import { getIsAuth } from "./store/user/selectors";
 // import { getUser } from "./store/user/selectors";
 import { testRef } from "./services/firebase";
+import { LogOut } from "./Components/LogOut";
 
 function App() {
   // const [authed, setAuthed] = useState(false);
@@ -88,6 +89,11 @@ function App() {
           authenticated={authed}
           path="/testAPI"
           component={TestAPI}
+        />
+        <PrivateRoute
+          authenticated={authed}
+          path="/logout"
+          component={LogOut}
         />
       </Switch>
     </>
