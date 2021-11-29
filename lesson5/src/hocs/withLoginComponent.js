@@ -31,9 +31,12 @@ export const withLoginComponent =(Component) => {
 			password = {password}
 			handleEmailChange={handleEmailChange}
 			email={email}
+			setEmail={setEmail}
 			handleSubmit={handleSubmit}
 			error={error}
+			onSubmit={props.onSubmit}
 		/>)
 	}
 }
+
 
