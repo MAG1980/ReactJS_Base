@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { auth } from "../services/firebase";
+import { auth, FirebaseLogin } from "../services/firebase";
 import { LoginRenderer } from "./LoginRenderer";
 
 export const Login =() => {
@@ -20,7 +20,7 @@ export const Login =() => {
 			setError("");
 
 			try {
-				await auth.signInWithEmailAndPassword(email, password);
+				await FirebaseLogin(email, password);
 			} catch (error) {
 				setError(error.message);
 			}

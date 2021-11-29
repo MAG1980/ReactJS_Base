@@ -1,5 +1,5 @@
 import { initialState, userReducer } from "../reducer";
-import { LOGOUT_USER } from "../actions";
+import { loginUserAction, logOutUserAction } from "../actions";
 
 describe("userReducer", () => {
   it("Вызов редьюсера без экшна верёт initialState", () => {
@@ -8,10 +8,17 @@ describe("userReducer", () => {
     expect(result).toEqual(initialState);
   });
 
-  it ("Вызов редьюсера с action.type = LOGOUT_USER вернёт {user: null}",
+  it("Данные  в store обновляются при логине поьзователя ", () =>{
+    const user = {name:"testUser",
+    email: "test@test.test"}
+    const result = userReducer(undefined, loginUserAction(user))
+
+    expect(result).toEqual( { user: user })
+  })
+
+  it ("Вызов редьюсера с logOutUserAction вернёт {user: null}",
     ()=>{
-    const logout = {type:LOGOUT_USER};
-    const result = userReducer(initialState, logout);
+      const result = userReducer(undefined, logOutUserAction);
 
      expect(result).toEqual({user:null})
     })

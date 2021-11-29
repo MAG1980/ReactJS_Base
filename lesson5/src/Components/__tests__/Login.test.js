@@ -2,6 +2,10 @@ import {LoginRenderer, LoginFormTestIds} from "../LoginRenderer"
 import {render, fireEvent, act} from "@testing-library/react";
 import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter as Router } from "react-router-dom";
+import { FirebaseLogin } from "../../services/firebase";
+import { Login } from "../Login";
+
+jest.mock("../../services/firebase");
 
 describe('LoginForm', ()=>{
 
@@ -10,7 +14,7 @@ describe('LoginForm', ()=>{
 		const component = render(<Router><LoginRenderer testSubmit={testSubmit} /></Router>)
 
 		act(()=>{
-			fireEvent.click(component.queryByTestId((LoginFormTestIds.submit)))
+			fireEvent.click(component.queryByTestId(LoginFormTestIds.submit))
 		})
 
 		await	expect(testSubmit).toBeCalled();
@@ -61,6 +65,41 @@ describe('LoginForm', ()=>{
 		})
 
 		expect(setPassword).toHaveBeenCalledWith(passwordValue)
+
+	})
+})
+
+
+
+describe("Тест корректности авторизации (test API)",()=>{
+	it('Корректная авторизация', ()=>{
+		const login = "example@example.com";
+		const password = "1234567";
+
+		const component = render(<Router><Login /></Router>)
+
+		const loginField = component.queryByTestId(LoginFormTestIds.emailField);
+		const passwordField = component.queryByTestId(LoginFormTestIds.passwordField);
+		const submitButton = component.queryByTestId(LoginFormTestIds.submit);
+
+		act(()=>{
+			fireEvent.change(loginField, {
+				target:{
+					value:login
+				}
+			})
+			fireEvent.change(passwordField, {
+				target:{
+					value:password
+				}
+			})
+		})
+
+		act(()=>{
+			fireEvent.click(submitButton)
+		})
+
+		expect(FirebaseLogin).toHaveBeenCalledWith(login, password)
 
 	})
 })

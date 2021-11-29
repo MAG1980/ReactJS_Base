@@ -16,6 +16,8 @@ firebase.initializeApp(firebaseConfig);
 export const auth = firebase.auth();
 export const db = firebase.database();
 
+export const FirebaseLogin = auth.signInWithEmailAndPassword;
+
 export const profileRef = db.ref("profile");
 export const chatsListRef = db.ref("chatsList");
 export const messagesRef = db.ref("messages");
