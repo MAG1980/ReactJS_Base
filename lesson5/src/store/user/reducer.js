@@ -1,12 +1,12 @@
 // import { auth } from "../../services/firebase";
 import { LOGIN_USER, LOGOUT_USER } from "./actions";
 
-const initialState = {
+export const initialState = {
   user: null,
 };
 
 export const userReducer = (state = initialState, action) => {
-  switch (action.type) {
+  switch (action?.type) {
     case LOGIN_USER: {
       return { user: action.payload };
     }
