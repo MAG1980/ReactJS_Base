@@ -1,70 +1,35 @@
-import { React, componentDidMount } from "react";
-import { useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { React } from "react";
+
+import { useSelector } from "react-redux";
 import { Header } from "../../Components/Header";
-import { Container } from "@mui/material";
-import { ChangeNameActionCreator } from "../../store/actionCreators/ChangeNameActionCreator";
-// import { GetNameActionCreator } from "../../store/actionCreators/GetNameActionCreator";
-// import { TOGGLE_SHOW_PROFILE } from "../../store/profile/action";
-import { ToggleShowProfileActionCreator } from "../../store/actionCreators/ToggleShowProfileActionCreator";
-import {
-  getProfileName,
-  getProfileIsShow,
-} from "../../store/profile/selectors";
+import { Container, Box, Typography } from "@mui/material";
+
+import { getUserName, getUserEmail } from "../../store/user/selectors";
 
 export const Profile = () => {
-  const dispatch = useDispatch();
-  const isShow = useSelector((state) => state.profileReducer.isShow);
-
-  const [value, setValue] = useState("");
-
-  // const profileUserName = useSelector((state) => state.profileReducer.name);
-  const profileUserName = useSelector(getProfileName);
-
-  // profileUserName = dispatch(GetNameActionCreator()).name; не работает.
-  console.log(profileUserName);
-  const setName = useCallback(() => {
-    dispatch(ChangeNameActionCreator(value));
-    console.log(value);
-    setValue("");
-  }, [dispatch, value]);
-
-  const handleChange = useCallback(
-    (e) => {
-      setValue(e.target.value);
-      console.log(value);
-    },
-    [value]
-  );
-
-  const toggleCheckboxShow = useCallback(() => {
-    dispatch(ToggleShowProfileActionCreator());
-  }, [dispatch]);
+  const profileUserName = useSelector(getUserName);
+  const profileUserEmail = useSelector(getUserEmail);
 
   return (
     <Container>
       <Header />
-      <h1>Profile</h1>
-      <input
-        type="checkbox"
-        checked={isShow}
-        value={isShow}
-        onChange={toggleCheckboxShow}
-        // onChange={() => {
-        //   dispatch({
-        //     type: TOGGLE_SHOW_PROFILE,
-        //   });
-        // }}
-      />
-      <div>
-        <h4>{profileUserName}</h4>
-      </div>
-      <div>
-        <input value={value} type="text" onChange={handleChange} />
-      </div>
-      <div>
-        <button onClick={setName}>Change Name</button>
-      </div>
+      <Typography align="center" component="h1" sx={{ fontSize: "25px", m: 2 }}>
+        Profile
+      </Typography>
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateRows: "repeat(2, 1fr)",
+          gridTemplateColumns: "20% 80%",
+          alignItems: "center",
+          gridGap: "5px",
+        }}
+      >
+        <Typography sx={{ fontSize: "20px" }}> Name:</Typography>
+        <Typography sx={{ fontSize: "30px" }}>{profileUserName}</Typography>
+        <Typography sx={{ fontSize: "20px" }}> Email:</Typography>
+        <Typography sx={{ fontSize: "30px" }}>{profileUserEmail}</Typography>
+      </Box>
     </Container>
   );
 };

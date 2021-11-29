@@ -1,4 +1,4 @@
-import { propTypes } from "prop-types";
+// import { propTypes } from "prop-types";
 import { List } from "@mui/material";
 import { Chat } from "./Chat";
 export const Chats = ({ children }) => {

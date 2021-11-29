@@ -1,9 +1,6 @@
 import IconButton from "@mui/material/IconButton";
 import AddReactionIcon from "@mui/icons-material/AddReaction";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
-import { useCallback, useState, React } from "react";
-import { useDispatch } from "react-redux";
-import { addChatActionCreator } from "../store/actionCreators/AddChatActionCreator";
 
 import { Box, TextField, Button, Modal } from "@mui/material/";
 
@@ -19,22 +16,13 @@ const style = {
   p: 4,
 };
 
-export const AddChatModal = () => {
-  const [inputValue, setInputValue] = useState("");
-  const changeStateValue = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const dispatch = useDispatch();
-
-  const addChat = useCallback(() => {
-    handleClose();
-    dispatch(addChatActionCreator(inputValue), [dispatch]);
-  });
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-
+export const AddChatModal = ({
+  open,
+  handleOpen,
+  handleClose,
+  addChat,
+  changeStateValue,
+}) => {
   return (
     <>
       <IconButton onClick={handleOpen}>
@@ -50,11 +38,13 @@ export const AddChatModal = () => {
       >
         <Box sx={style}>
           <TextField
+            autoFocus
             onChange={changeStateValue}
             id="outlined-basic"
             label="NewUser Name"
             variant="outlined"
             required
+            sx={{ width: "80%" }}
           />
           <Button onClick={addChat}>
             <AddCircleOutlineSharpIcon fontSize="large" />

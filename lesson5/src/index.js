@@ -6,7 +6,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Provider } from "react-redux";
-import { store } from "./store/index";
+import { store, persistor } from "./store/index";
+import { CircularProgress } from "@mui/material";
+import { PersistGate } from "redux-persist/integration/react";
 
 const myTheme = createTheme({
   palette: {
@@ -30,7 +32,9 @@ ReactDOM.render(
     <Router>
       <ThemeProvider theme={myTheme}>
         <Provider store={store}>
-          <App />
+          <PersistGate persistor={persistor} loading={<CircularProgress />}>
+            <App />
+          </PersistGate>
         </Provider>
       </ThemeProvider>
     </Router>
